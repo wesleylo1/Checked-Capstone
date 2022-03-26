@@ -1,0 +1,12 @@
+.app {
+  background-color: #fefbf3;
+  display: flex;
+  flex-direction: column;
+  padding-top: 15em;
+  align-items: center;
+  height: 100vh;
+}
+
+.app > button {
+  margin-top: 5em;
+}

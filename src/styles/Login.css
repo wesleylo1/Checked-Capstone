@@ -1,0 +1,31 @@
+.login {
+  display: flex;
+  justify-content: center;
+  margin-top: 5em;
+}
+
+form > p {
+  display: inline;
+  margin-right: 5em;
+}
+
+form > p:nth-child(2) {
+  margin-right: 2em;
+}
+
+form > p:last-child {
+  margin-right: 0;
+}
+
+form input {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #000000;
+  background: transparent;
+}
+
+form > button {
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid black;
+}
