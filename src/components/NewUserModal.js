@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import "../styles/NewUserModal.css"
+// import axios from "axios"
 
 function NewUserModal({ trigger, setTrigger }) {
-  const [id, setId] = useState(0)
-  const [first, setFirst] = useState("")
+  const [id, setId] = useState(1)
   const [last, setLast] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -11,7 +11,7 @@ function NewUserModal({ trigger, setTrigger }) {
   let users = []
 
   let newUser = {
-    id: "",
+    id: id,
     firstName: "",
     lastName: "",
     email: "",
@@ -19,38 +19,34 @@ function NewUserModal({ trigger, setTrigger }) {
   }
 
   function handleFirstChange(e) {
-    setFirst(e.target.value)
+    let key = e.target.name
+    newUser[key] = e.target.value
   }
 
   function handleLastChange(e) {
     setLast(e.target.value)
+    newUser.lastName = last
   }
 
   function handleEmailChange(e) {
     setEmail(e.target.value)
+    newUser.email = email
   }
 
   function handlePasswordChange(e) {
     setPassword(e.target.value)
+    newUser.password = password
   }
 
   function addUser(e) {
     e.preventDefault()
 
-    newUser.id = id
-    newUser.firstName = first
-    newUser.lastName = last
-    newUser.email = email
-    newUser.password = password
-
     users.push(newUser)
     console.log(users)
     setId((id) => id + 1)
 
-    setFirst("")
-    setLast("")
-    setEmail("")
-    setPassword("")
+    setTrigger(false)
+    alert("user created")
   }
 
   return trigger ? (
@@ -64,24 +60,24 @@ function NewUserModal({ trigger, setTrigger }) {
         <p>
           First Name:
           <input
-            value={first}
-            type="text"
+            name="firstName"
             onChange={handleFirstChange}
+            type="text"
             autoFocus
           />
         </p>
         <p>
           Last Name:
-          <input value={last} type="text" onChange={handleLastChange} />
+          <input name="lastName" type="text" onChange={handleLastChange} />
         </p>
         <p>
           Email:
-          <input value={email} type="email" onChange={handleEmailChange} />
+          <input name="email" type="email" onChange={handleEmailChange} />
         </p>
         <p>
           Password:
           <input
-            value={password}
+            name="password"
             type="password"
             onChange={handlePasswordChange}
           />
