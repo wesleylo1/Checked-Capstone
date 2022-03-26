@@ -24,8 +24,13 @@ form input {
   background: transparent;
 }
 
-form > button {
+form > .login-button {
   cursor: pointer;
   background: transparent;
-  border: 1px solid black;
+  outline: 1px solid #9d9d9d;
+  background-color: #79b4b7;
+  color: #ffe3e3;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 10px;
 }

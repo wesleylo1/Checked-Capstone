@@ -9,4 +9,8 @@
 
 .app > button {
   margin-top: 5em;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-bottom: 1px solid black;
 }

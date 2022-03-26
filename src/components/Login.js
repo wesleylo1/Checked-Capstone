@@ -43,7 +43,9 @@ function Login() {
             onChange={handlePasswordChange}
           />
         </p>
-        <button onClick={showInfo}>Next</button>
+        <button className="login-button" onClick={showInfo}>
+          Next
+        </button>
       </form>
     </div>
   )
