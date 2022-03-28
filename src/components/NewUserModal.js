@@ -1,17 +1,16 @@
+import axios from "axios"
 import React, { useState } from "react"
 import "../styles/NewUserModal.css"
-// import axios from "axios"
 
 function NewUserModal({ trigger, setTrigger }) {
-  const [id, setId] = useState(1)
-  const [last, setLast] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-
-  let users = []
+  const [emailError, setEmailError] = useState({})
+  const [passwordError, setPasswordError] = useState({})
 
   let newUser = {
-    id: id,
     firstName: "",
     lastName: "",
     email: "",
@@ -19,35 +18,82 @@ function NewUserModal({ trigger, setTrigger }) {
   }
 
   function handleFirstChange(e) {
+    setFirstName(e.target.value)
     let key = e.target.name
     newUser[key] = e.target.value
   }
 
   function handleLastChange(e) {
-    setLast(e.target.value)
-    newUser.lastName = last
+    setLastName(e.target.value)
+    let key = e.target.name
+    newUser[key] = e.target.value
   }
 
   function handleEmailChange(e) {
     setEmail(e.target.value)
-    newUser.email = email
+    let key = e.target.name
+    newUser[key] = e.target.value
   }
 
   function handlePasswordChange(e) {
     setPassword(e.target.value)
-    newUser.password = password
+    let key = e.target.name
+    newUser[key] = e.target.value
   }
 
   function addUser(e) {
     e.preventDefault()
-
-    users.push(newUser)
-    console.log(users)
-    setId((id) => id + 1)
-
-    setTrigger(false)
-    alert("user created")
+    const isValid = formValidation()
+    if (isValid) {
+      newUser = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password
+      }
+      axios
+        .post("/register", newUser)
+        .then(() => {
+          setTrigger(false)
+          alert("user created")
+          setFirstName("")
+          setLastName("")
+          setEmail("")
+          setPassword("")
+        })
+        .catch((error) => console.log(error))
+    }
   }
+
+  const formValidation = () => {
+    const emailError = {}
+    const passwordError = {}
+    let isValid = true
+
+    if (email.trim().length > 225) {
+      emailError.tooLong = "email is too long"
+      isValid = false
+    }
+    if (!email.includes("@")) {
+      emailError.noSymbol = "email needs @"
+      isValid = false
+    }
+    if (email.trim().length < 5) {
+      emailError.tooShort = "email is too short"
+      isValid = false
+    }
+    if (password.trim().length < 8) {
+      passwordError.empty = "password needs a minimum of 8 characters"
+      isValid = false
+    }
+
+    setEmailError(emailError)
+    setPasswordError(passwordError)
+
+    return isValid
+  }
+
+  // Return
 
   return trigger ? (
     <div className="new-user">
@@ -60,6 +106,7 @@ function NewUserModal({ trigger, setTrigger }) {
         <p>
           First Name:
           <input
+            value={firstName}
             name="firstName"
             onChange={handleFirstChange}
             type="text"
@@ -68,23 +115,41 @@ function NewUserModal({ trigger, setTrigger }) {
         </p>
         <p>
           Last Name:
-          <input name="lastName" type="text" onChange={handleLastChange} />
-        </p>
-        <p>
-          Email:
-          <input name="email" type="email" onChange={handleEmailChange} />
-        </p>
-        <p>
-          Password:
           <input
+            value={lastName}
+            name="lastName"
+            type="text"
+            onChange={handleLastChange}
+          />
+        </p>
+        <p>
+          Email*:
+          <input
+            value={email}
+            name="email"
+            type="email"
+            onChange={handleEmailChange}
+          />
+        </p>
+        {Object.keys(emailError).map((key) => {
+          return <div style={{ color: "red" }}>{emailError[key]}</div>
+        })}
+        <p>
+          Password*:
+          <input
+            value={password}
             name="password"
             type="password"
             onChange={handlePasswordChange}
           />
         </p>
-        <button className="new-button" onClick={addUser}>
+        {Object.keys(passwordError).map((key) => {
+          return <div style={{ color: "red" }}>{passwordError[key]}</div>
+        })}
+        <button onClick={addUser} className="new-button">
           Submit
         </button>
+        <h6>* is required</h6>
       </form>
     </div>
   ) : (

@@ -1,3 +1,4 @@
+import axios from "axios"
 import React, { useState } from "react"
 import "../styles/Login.css"
 
@@ -16,9 +17,21 @@ function Login() {
   function showInfo(e) {
     e.preventDefault()
 
-    alert(`email: ${email} password: ${password}`)
-    setEmail("")
-    setPassword("")
+    let userLogin = {
+      email: "",
+      password: ""
+    }
+    userLogin.email = email
+    userLogin.password = password
+
+    axios
+      .post("/login", userLogin)
+      .then((res) => {
+        alert(res.data)
+        setEmail("")
+        setPassword("")
+      })
+      .catch((error) => console.log(error))
   }
 
   return (

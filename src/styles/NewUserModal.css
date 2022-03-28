@@ -72,3 +72,8 @@ form .new-button:hover {
 form .new-button:active {
   transform: translateY(2px);
 }
+
+h6 {
+  margin-top: 2em;
+  margin: 0 auto;
+}
