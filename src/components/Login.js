@@ -57,7 +57,7 @@ function Login() {
           />
         </p>
         <button className="login-button" onClick={showInfo}>
-          Next
+          Log In
         </button>
       </form>
     </div>

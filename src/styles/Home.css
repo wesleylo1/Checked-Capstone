@@ -1,0 +1,16 @@
+.home {
+  background-color: #fefbf3;
+  display: flex;
+  flex-direction: column;
+  padding-top: 15em;
+  align-items: center;
+  height: 100vh;
+}
+
+.home > button {
+  margin-top: 5em;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-bottom: 1px solid black;
+}
