@@ -21,12 +21,13 @@ module.exports = {
 
     try {
       let info = await sequelize.query(`
-      SELECT password FROM users WHERE email = '${email}'
+      SELECT * FROM users WHERE email = '${email}'
     `)
+
       let tablePassword = info[0][0].password
 
       if (await bcrypt.compare(password, tablePassword)) {
-        res.send("correct")
+        res.status(200).send(info)
       } else {
         res.send("incorrect password")
       }

@@ -1,8 +1,11 @@
 import axios from "axios"
 import React, { useState } from "react"
 import "../styles/Login.css"
+import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 function Login() {
+  let navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
@@ -27,7 +30,9 @@ function Login() {
     axios
       .post("/login", userLogin)
       .then((res) => {
-        alert(res.data)
+        if (res.status === 200) {
+          navigate(`/user/${res.data[0][0].first_name}`)
+        }
         setEmail("")
         setPassword("")
       })
@@ -56,9 +61,11 @@ function Login() {
             onChange={handlePasswordChange}
           />
         </p>
-        <button className="login-button" onClick={showInfo}>
-          Log In
-        </button>
+        <Link to="/user">
+          <button className="login-button" onClick={showInfo}>
+            Log In
+          </button>
+        </Link>
       </form>
     </div>
   )
