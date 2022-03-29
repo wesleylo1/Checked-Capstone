@@ -23,7 +23,6 @@ module.exports = {
       let info = await sequelize.query(`
       SELECT password FROM users WHERE email = '${email}'
     `)
-      console.log("hey")
       let tablePassword = info[0][0].password
 
       if (await bcrypt.compare(password, tablePassword)) {
