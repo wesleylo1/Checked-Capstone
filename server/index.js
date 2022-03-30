@@ -4,7 +4,7 @@ const path = require("path")
 const cors = require("cors")
 const app = express()
 const port = process.env.PORT || 4000
-const { registerUser, loginUser } = require("./controller")
+const { registerUser, loginUser, getChecklist } = require("./controller")
 
 // Middleware
 app.use(express.json())
@@ -14,5 +14,6 @@ app.use(express.static(path.join(__dirname, "/public")))
 // Put endpoints here
 app.post("/register", registerUser)
 app.post("/login", loginUser)
+app.get("/getChecklist/:id", getChecklist)
 
 app.listen(port, () => console.log(`server running on ${port}`))

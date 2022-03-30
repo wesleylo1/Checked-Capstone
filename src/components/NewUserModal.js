@@ -1,5 +1,6 @@
 import axios from "axios"
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import "../styles/NewUserModal.css"
 
 function NewUserModal({ trigger, setTrigger }) {
@@ -9,6 +10,7 @@ function NewUserModal({ trigger, setTrigger }) {
   const [password, setPassword] = useState("")
   const [emailError, setEmailError] = useState({})
   const [passwordError, setPasswordError] = useState({})
+  const navigate = useNavigate()
 
   let newUser = {
     firstName: "",
@@ -55,7 +57,7 @@ function NewUserModal({ trigger, setTrigger }) {
         .post("/register", newUser)
         .then(() => {
           setTrigger(false)
-          alert("user created")
+          navigate("/login")
           setFirstName("")
           setLastName("")
           setEmail("")

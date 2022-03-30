@@ -24,17 +24,31 @@ module.exports = {
       SELECT * FROM users WHERE email = '${email}'
     `)
 
+      let userObj = {
+        id: info[0][0].id,
+        name: info[0][0].first_name,
+        email: info[0][0].email
+      }
+
       let tablePassword = info[0][0].password
 
       if (await bcrypt.compare(password, tablePassword)) {
-        res.status(200).send(info)
+        res.status(200).send(userObj)
       } else {
-        res.send("incorrect password")
+        res.status(401).send("incorrect password")
       }
     } catch {
-      res.send("incorrect email and/or password")
+      res.status(401).send("incorrect email and/or password")
     }
+  },
+
+  getChecklist: async (req, res) => {
+    let { id } = req.params
+
+    let checklists = await sequelize.query(`
+      select * from events where users_id = ${id}
+    `)
+
+    res.status(200).send(checklists[0])
   }
 }
-
-// res.redirect('page')

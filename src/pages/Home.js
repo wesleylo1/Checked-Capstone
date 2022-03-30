@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import "../styles/Home.css"
-import NewUserModal from "./NewUserModal"
-import Login from "./Login"
+import NewUserModal from "../components/NewUserModal"
+import { Link } from "react-router-dom"
 
 function Home() {
   const [formPopup, setFormPopup] = useState(false)
@@ -14,7 +14,10 @@ function Home() {
     <div className="home">
       <NewUserModal trigger={formPopup} setTrigger={setFormPopup} />
       <h1>Checked!</h1>
-      <Login />
+
+      <Link to="/login">
+        <button>Log in</button>
+      </Link>
       <button onClick={newCard}>New User?</button>
     </div>
   )
