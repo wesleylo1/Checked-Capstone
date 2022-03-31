@@ -51,7 +51,7 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
 
       <ul>
         {tasks.map((element) => {
-          return <li key={element.id}>{element.tasks}</li>
+          return <p key={element.id}>{element.tasks}</p>
         })}
       </ul>
     </div>
