@@ -10,7 +10,8 @@ const {
   getChecklist,
   newChecklist,
   createNewTask,
-  getTasks
+  getTasks,
+  deleteChecklist
 } = require("./controller")
 
 // Middleware
@@ -25,5 +26,6 @@ app.get("/getChecklist/:id", getChecklist)
 app.post("/newlist/:id", newChecklist)
 app.post("/newtask", createNewTask)
 app.get("/getTasks/:id/:listTitle", getTasks)
+app.delete("/deletechecklist/:listTitle", deleteChecklist)
 
 app.listen(PORT, () => console.log(`server running on ${PORT}`))

@@ -90,5 +90,15 @@ module.exports = {
       WHERE users_id = ${id}
     `)
     res.status(200).send(items[0])
+  },
+
+  deleteChecklist: async (req, res) => {
+    let { listTitle } = req.params
+    try {
+      sequelize.query(`
+        DROP TABLE ${listTitle}
+      `)
+      res.status(200).send("done")
+    } catch {}
   }
 }

@@ -32,6 +32,17 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
       })
   }
 
+  const deleteChecklist = () => {
+    setTrigger(false)
+    axios
+      .delete(`/deletechecklist/${listTitle}`)
+      .then((res) => {
+        console.log(res.data)
+        setTasks([])
+      })
+      .catch((err) => console.log(err))
+  }
+
   return trigger ? (
     <div className="checklist-modal">
       <div className="button-box">
@@ -45,6 +56,7 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
           value={task}
           onChange={(e) => setTask(e.target.value)}
           type="text"
+          autoFocus
         />
         <button onClick={createTask}>Add task</button>
       </form>
@@ -54,6 +66,7 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
           return <p key={element.id}>{element.tasks}</p>
         })}
       </ul>
+      <button onClick={deleteChecklist}>Delete</button>
     </div>
   ) : (
     ""
