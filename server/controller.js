@@ -46,9 +46,49 @@ module.exports = {
     let { id } = req.params
 
     let checklists = await sequelize.query(`
-      select * from events where users_id = ${id}
+      SELECT * FROM events WHERE users_id = ${id}
     `)
 
     res.status(200).send(checklists[0])
+  },
+
+  newChecklist: async (req, res) => {
+    let { title } = req.body
+    let { id } = req.params
+
+    try {
+      sequelize.query(`
+        CREATE TABLE ${title} (
+          id serial primary key,
+          tasks varchar(225) not null,
+          completion boolean DEFAULT 'false' not null,
+          users_id int DEFAULT ${id}
+        )
+      `)
+
+      res.status(200).send("done")
+    } catch {}
+  },
+
+  createNewTask: async (req, res) => {
+    let { task, title } = req.body
+
+    try {
+      sequelize.query(`
+        INSERT INTO ${title} (tasks)
+        VALUES ('${task}')
+      `)
+      res.status(200).send("done")
+    } catch {}
+  },
+
+  getTasks: async (req, res) => {
+    let { id, listTitle } = req.params
+
+    let items = await sequelize.query(`
+      SELECT tasks,completion,id FROM ${listTitle}
+      WHERE users_id = ${id}
+    `)
+    res.status(200).send(items[0])
   }
 }

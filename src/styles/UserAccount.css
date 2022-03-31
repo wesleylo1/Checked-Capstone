@@ -1,0 +1,13 @@
+.checklist-rectangle {
+  width: 200px;
+  height: 200px;
+  background-color: lightblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checklist-add-nl {
+  background: transparent;
+  border: none;
+}

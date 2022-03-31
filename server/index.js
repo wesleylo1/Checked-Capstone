@@ -3,8 +3,15 @@ const express = require("express")
 const path = require("path")
 const cors = require("cors")
 const app = express()
-const port = process.env.PORT || 4000
-const { registerUser, loginUser, getChecklist } = require("./controller")
+const PORT = process.env.PORT || 4000
+const {
+  registerUser,
+  loginUser,
+  getChecklist,
+  newChecklist,
+  createNewTask,
+  getTasks
+} = require("./controller")
 
 // Middleware
 app.use(express.json())
@@ -15,5 +22,8 @@ app.use(express.static(path.join(__dirname, "/public")))
 app.post("/register", registerUser)
 app.post("/login", loginUser)
 app.get("/getChecklist/:id", getChecklist)
+app.post("/newlist/:id", newChecklist)
+app.post("/newtask", createNewTask)
+app.get("/getTasks/:id/:listTitle", getTasks)
 
-app.listen(port, () => console.log(`server running on ${port}`))
+app.listen(PORT, () => console.log(`server running on ${PORT}`))
