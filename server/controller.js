@@ -46,7 +46,13 @@ module.exports = {
     let { id } = req.params
 
     let checklists = await sequelize.query(`
-      SELECT * FROM events WHERE users_id = ${id}
+    SELECT t.table_schema,t.table_name
+    FROM information_schema.tables t
+    INNER JOIN information_schema.columns c ON c.table_name = t.table_name AND c.table_schema = t.table_schema
+    WHERE c.column_name = 'users_id_${id}'
+    AND t.table_schema NOT IN ('information_schema', 'pg_catalog')
+    AND t.table_type = 'BASE TABLE'
+    ORDER BY t.table_schema;
     `)
 
     res.status(200).send(checklists[0])
@@ -62,7 +68,7 @@ module.exports = {
           id serial primary key,
           tasks varchar(225) not null,
           completion boolean DEFAULT 'false' not null,
-          users_id int DEFAULT ${id}
+          users_id_${id} int DEFAULT ${id}
         )
       `)
 
@@ -87,7 +93,7 @@ module.exports = {
 
     let items = await sequelize.query(`
       SELECT tasks,completion,id FROM ${listTitle}
-      WHERE users_id = ${id}
+      WHERE users_id_${id} = ${id}
     `)
     res.status(200).send(items[0])
   },

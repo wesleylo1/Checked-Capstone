@@ -1,5 +1,5 @@
 import axios from "axios"
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import "../../styles/ChecklistModal.css"
 
 function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
@@ -32,6 +32,11 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
       })
   }
 
+  const exitModal = () => {
+    setTasks([])
+    setTrigger(false)
+  }
+
   const deleteChecklist = () => {
     setTrigger(false)
     axios
@@ -46,7 +51,7 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
   return trigger ? (
     <div className="checklist-modal">
       <div className="button-box">
-        <button className="form-button" onClick={() => setTrigger(false)}>
+        <button className="form-button" onClick={exitModal}>
           x
         </button>
       </div>
@@ -63,7 +68,12 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
 
       <ul>
         {tasks.map((element) => {
-          return <p key={element.id}>{element.tasks}</p>
+          return (
+            <div>
+              <input key={element.id} type="checkbox" id={element.id} />
+              <label htmlFor={element.id}>{element.tasks}</label>
+            </div>
+          )
         })}
       </ul>
       <button onClick={deleteChecklist}>Delete</button>

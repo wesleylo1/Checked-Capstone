@@ -11,7 +11,6 @@ import "../styles/UserAccount.css"
 function UserAccount({ currentuser, setAuth }) {
   let { firstName } = useParams()
   let capsFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1)
-  // get info from database with their id
   const [checklists, setChecklists] = useState([])
   const [formPopup, setFormPopup] = useState(false)
   const [listTitle, setListTitle] = useState("")
@@ -28,14 +27,14 @@ function UserAccount({ currentuser, setAuth }) {
     setNewTitle(e.target.value)
   }
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`/getChecklist/${currentuser.id}`)
-  //     .then((res) => {
-  //       setChecklists(res.data)
-  //     })
-  //     .catch((err) => console.log(err))
-  // }, [currentuser.id])
+  useEffect(() => {
+    axios
+      .get(`/getChecklist/${currentuser.id}`)
+      .then((res) => {
+        setChecklists(res.data)
+      })
+      .catch((err) => console.log(err))
+  }, [currentuser.id, newTitle])
 
   const createNewChecklist = (e) => {
     e.preventDefault()
@@ -50,7 +49,7 @@ function UserAccount({ currentuser, setAuth }) {
   }
 
   return (
-    <div>
+    <div className="useraccount">
       <Navbar logout={logout} />
       <h1>Welcome {capsFirstName}! </h1>
       <ChecklistModal
@@ -59,29 +58,30 @@ function UserAccount({ currentuser, setAuth }) {
         trigger={formPopup}
         setTrigger={setFormPopup}
       />
-      {checklists.map((element) => {
-        return (
-          <Checklist
-            key={element.id}
-            task={element.tasks}
-            completion={element.completion}
-            title={element.title}
-          />
-        )
-      })}
-      <div className="checklist-rectangle">
-        <form>
-          <button className="checklist-add-nl" onClick={createNewChecklist}>
-            +
-          </button>
-          <input
-            value={newTitle}
-            onChange={changeInput}
-            type="text"
-            placeholder="New list"
-          />
-        </form>
-      </div>
+      <main className="cl-main">
+        {checklists.map((element) => {
+          return (
+            <Checklist
+              key={element.id}
+              task={element.tasks}
+              title={element.table_name}
+            />
+          )
+        })}
+        <div className="checklist-rectangle">
+          <form>
+            <button className="checklist-add-nl" onClick={createNewChecklist}>
+              +
+            </button>
+            <input
+              value={newTitle}
+              onChange={changeInput}
+              type="text"
+              placeholder="New list"
+            />
+          </form>
+        </div>
+      </main>
     </div>
   )
 }
