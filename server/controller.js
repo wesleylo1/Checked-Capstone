@@ -117,5 +117,28 @@ module.exports = {
       `)
 
     res.status(200).send(items[0])
+  },
+
+  addTask: async (req, res) => {
+    let { task } = req.body
+    let { title } = req.params
+
+    try {
+      sequelize.query(`
+        INSERT INTO ${title} (tasks)
+        VALUES ('${task}')
+      `)
+      res.status(200).send("done")
+    } catch {}
+  },
+
+  receiveTasks: async (req, res) => {
+    let { number, title } = req.params
+
+    let items = await sequelize.query(`
+      SELECT tasks,completion,id FROM ${title}
+      WHERE users_id_${number} = ${number}
+    `)
+    res.status(200).send(items[0])
   }
 }

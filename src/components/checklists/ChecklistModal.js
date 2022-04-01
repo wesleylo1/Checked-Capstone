@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import "../../styles/ChecklistModal.css"
 import axios from "axios"
 
 function ChecklistModal({ trigger, setTrigger, title, id, tasks }) {
   const [task, setTask] = useState("")
+  const [items, setItems] = useState([])
 
   const createTask = async (e) => {
     e.preventDefault()
@@ -11,7 +12,6 @@ function ChecklistModal({ trigger, setTrigger, title, id, tasks }) {
       task: task,
       title: title
     }
-    console.log(title)
 
     await axios
       .post("/newtask", info)
@@ -24,7 +24,7 @@ function ChecklistModal({ trigger, setTrigger, title, id, tasks }) {
     await axios
       .get(`/getTasks/${id}/${title}`)
       .then((res) => {
-        setTask(res.data)
+        setItems(res.data)
       })
       .catch((err) => {
         console.log(err)

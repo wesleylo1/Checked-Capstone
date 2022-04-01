@@ -1,11 +1,12 @@
 import axios from "axios"
 import React, { useState } from "react"
 import "../../styles/Checklist.css"
-import ChecklistModal from "./ChecklistModal"
+import "../../styles/ChecklistModal.css"
 
-function Checklist({ task, title, number }) {
+function Checklist({ title, number }) {
   const [formPopup, setFormPopup] = useState(false)
   const [tasks, setTasks] = useState([])
+  const [task, setTask] = useState("")
 
   const openChecklist = () => {
     setFormPopup(true)
@@ -18,15 +19,74 @@ function Checklist({ task, title, number }) {
       .catch((err) => console.log(err))
   }
 
+  const deleteChecklist = () => {
+    setFormPopup(false)
+    axios
+      .delete(`/deletechecklist/${title}`)
+      .then((res) => {
+        console.log(res.data)
+      })
+      .catch((err) => console.log(err))
+  }
+
+  const createTask = async (e) => {
+    e.preventDefault()
+
+    await axios
+      .post(`/${title}/newtask`, { task: task })
+      .then((res) => {
+        console.log(res.data)
+        setTask("")
+      })
+      .catch((err) => console.log(err))
+
+    await axios
+      .get(`/gettasks/${number}/${title}`)
+      .then((res) => {
+        setTasks(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   return (
     <div>
-      <ChecklistModal
-        trigger={formPopup}
-        setTrigger={setFormPopup}
-        title={title}
-        id={number}
-        tasks={tasks}
-      />
+      {formPopup ? (
+        <div className="checklist-modal">
+          <div className="button-box">
+            <button onClick={() => setFormPopup(false)} className="form-button">
+              x
+            </button>
+          </div>
+
+          <h1>{title}</h1>
+
+          <form>
+            <input
+              value={task}
+              onChange={(e) => setTask(e.target.value)}
+              type="text"
+              autoFocus
+            />
+            <button onClick={createTask}>Add task</button>
+          </form>
+
+          <ul>
+            {tasks.map((element) => {
+              return (
+                <div>
+                  <input key={element.id} type="checkbox" id={element.id} />
+                  <label htmlFor={element.id}>{element.tasks}</label>
+                </div>
+              )
+            })}
+          </ul>
+          <button onClick={deleteChecklist}>Delete</button>
+        </div>
+      ) : (
+        ""
+      )}
       <div onClick={openChecklist} className="cl-box">
         <h1>{title}</h1>
       </div>

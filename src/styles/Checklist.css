@@ -6,4 +6,9 @@
   justify-content: center;
   align-items: center;
   margin: 2em;
+  cursor: pointer;
+}
+
+.cl-box h1 {
+  cursor: pointer;
 }
