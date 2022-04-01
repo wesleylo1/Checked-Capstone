@@ -106,5 +106,16 @@ module.exports = {
       `)
       res.status(200).send("done")
     } catch {}
+  },
+
+  selectChecklist: async (req, res) => {
+    let { id, title } = req.params
+
+    let items = await sequelize.query(`
+        SELECT tasks,completion,id FROM ${title}
+        WHERE users_id_${id} = ${id}
+      `)
+
+    res.status(200).send(items[0])
   }
 }

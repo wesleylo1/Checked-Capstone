@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 2em;
 }
 
 .checklist-add-nl {
@@ -19,5 +20,5 @@
 .cl-main {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: left;
 }

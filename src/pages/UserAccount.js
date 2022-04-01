@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom"
 import Checklist from "../components/checklists/Checklist"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
-import ChecklistModal from "../components/checklists/ChecklistModal"
+import NewChecklistModal from "../components/checklists/NewChecklistModal"
 import "../styles/UserAccount.css"
 
 function UserAccount({ currentuser, setAuth }) {
@@ -29,7 +29,7 @@ function UserAccount({ currentuser, setAuth }) {
 
   useEffect(() => {
     axios
-      .get(`/getChecklist/${currentuser.id}`)
+      .get(`/getChecklists/${currentuser.id}`)
       .then((res) => {
         setChecklists(res.data)
       })
@@ -52,7 +52,7 @@ function UserAccount({ currentuser, setAuth }) {
     <div className="useraccount">
       <Navbar logout={logout} />
       <h1>Welcome {capsFirstName}! </h1>
-      <ChecklistModal
+      <NewChecklistModal
         id={currentuser.id}
         listTitle={listTitle}
         trigger={formPopup}
@@ -62,7 +62,7 @@ function UserAccount({ currentuser, setAuth }) {
         {checklists.map((element) => {
           return (
             <Checklist
-              key={element.id}
+              number={currentuser.id}
               task={element.tasks}
               title={element.table_name}
             />

@@ -1,17 +1,17 @@
-import React, { useState } from "react"
-import "../../styles/ChecklistModal.css"
 import axios from "axios"
+import React, { useState } from "react"
+import "../../styles/NewChecklistModal.css"
 
-function ChecklistModal({ trigger, setTrigger, title, id, tasks }) {
+function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
   const [task, setTask] = useState("")
+  const [tasks, setTasks] = useState([])
 
   const createTask = async (e) => {
     e.preventDefault()
     let info = {
       task: task,
-      title: title
+      title: listTitle
     }
-    console.log(title)
 
     await axios
       .post("/newtask", info)
@@ -22,9 +22,9 @@ function ChecklistModal({ trigger, setTrigger, title, id, tasks }) {
       .catch((err) => console.log(err))
 
     await axios
-      .get(`/getTasks/${id}/${title}`)
+      .get(`/getTasks/${id}/${listTitle}`)
       .then((res) => {
-        setTask(res.data)
+        setTasks(res.data)
       })
       .catch((err) => {
         console.log(err)
@@ -32,29 +32,29 @@ function ChecklistModal({ trigger, setTrigger, title, id, tasks }) {
   }
 
   const exitModal = () => {
+    setTasks([])
     setTrigger(false)
   }
 
   const deleteChecklist = () => {
     setTrigger(false)
     axios
-      .delete(`/deletechecklist/${title}`)
+      .delete(`/deletechecklist/${listTitle}`)
       .then((res) => {
         console.log(res.data)
+        setTasks([])
       })
       .catch((err) => console.log(err))
   }
 
   return trigger ? (
-    <div className="checklist-modal">
+    <div className="new-checklist-modal">
       <div className="button-box">
-        <button onClick={exitModal} className="form-button">
+        <button className="form-button" onClick={exitModal}>
           x
         </button>
       </div>
-
-      <h1>{title}</h1>
-
+      <h1 className="cm-title">{listTitle}</h1>
       <form>
         <input
           value={task}

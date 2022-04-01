@@ -11,7 +11,8 @@ const {
   newChecklist,
   createNewTask,
   getTasks,
-  deleteChecklist
+  deleteChecklist,
+  selectChecklist
 } = require("./controller")
 
 // Middleware
@@ -22,10 +23,11 @@ app.use(express.static(path.join(__dirname, "/public")))
 // Put endpoints here
 app.post("/register", registerUser)
 app.post("/login", loginUser)
-app.get("/getChecklist/:id", getChecklist)
+app.get("/getChecklists/:id", getChecklist)
 app.post("/newlist/:id", newChecklist)
 app.post("/newtask", createNewTask)
 app.get("/getTasks/:id/:listTitle", getTasks)
 app.delete("/deletechecklist/:listTitle", deleteChecklist)
+app.get("/checklist/:id/:title", selectChecklist)
 
 app.listen(PORT, () => console.log(`server running on ${PORT}`))
