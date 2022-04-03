@@ -5,6 +5,7 @@ import "../../styles/NewChecklistModal.css"
 function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
   const [task, setTask] = useState("")
   const [tasks, setTasks] = useState([])
+  const [checked, setChecked] = useState(false)
 
   const createTask = async (e) => {
     e.preventDefault()
@@ -58,7 +59,29 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
         {tasks.map((element) => {
           return (
             <div>
-              <input key={element.id} type="checkbox" id={element.id} />
+              <input
+                onChange={() => {
+                  setChecked(!checked)
+                  if (checked === false) {
+                    axios
+                      .post(`/changeStatusTrue/${listTitle}/${element.id}`)
+                      .then((res) => {
+                        console.log(res.data)
+                      })
+                      .catch((error) => console.log(error))
+                  } else {
+                    axios
+                      .post(`/changeStatusFalse/${listTitle}/${element.id}`)
+                      .then((res) => {
+                        console.log(res.data)
+                      })
+                      .catch((error) => console.log(error))
+                  }
+                }}
+                key={element.id}
+                type="checkbox"
+                id={element.id}
+              />
               <label htmlFor={element.id}>{element.tasks}</label>
             </div>
           )

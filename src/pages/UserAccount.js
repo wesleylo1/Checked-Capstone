@@ -34,7 +34,14 @@ function UserAccount({ currentuser, setAuth }) {
         setChecklists(res.data)
       })
       .catch((err) => console.log(err))
-  }, [currentuser.id, newTitle])
+  })
+  // [currentuser.id, formPopup, setFormPopup]
+
+  useEffect(() => {
+    return () => {
+      console.log("cleaned up")
+    }
+  }, [])
 
   const createNewChecklist = (e) => {
     e.preventDefault()
@@ -62,6 +69,15 @@ function UserAccount({ currentuser, setAuth }) {
         {checklists.map((element) => {
           return (
             <Checklist
+              // gone={() => {
+              //   axios
+              //     .delete(`/deletechecklist/${element.table_name}`)
+              //     .then((res) => {
+              //       console.log(res.data)
+              //     })
+              //     .catch((err) => console.log(err))
+              //   setFormPopup(false)
+              // }}
               number={currentuser.id}
               task={element.tasks}
               title={element.table_name}

@@ -140,5 +140,27 @@ module.exports = {
       WHERE users_id_${number} = ${number}
     `)
     res.status(200).send(items[0])
+  },
+
+  changeTrue: async (req, res) => {
+    let { title, id } = req.params
+
+    await sequelize.query(`
+      UPDATE ${title}
+      SET completion = 'true'
+      WHERE id = ${id}
+    `)
+    res.status(200).status("complete")
+  },
+
+  changeFalse: async (req, res) => {
+    let { title, id } = req.params
+
+    await sequelize.query(`
+      UPDATE ${title}
+      SET completion = 'false'
+      WHERE id = ${id}
+    `)
+    res.status(200).status("complete")
   }
 }

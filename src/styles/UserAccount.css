@@ -1,3 +1,7 @@
+.useraccount {
+  display: relative;
+}
+
 .useraccount > h1 {
   text-align: center;
 }

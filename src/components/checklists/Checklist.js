@@ -7,6 +7,7 @@ function Checklist({ title, number }) {
   const [formPopup, setFormPopup] = useState(false)
   const [tasks, setTasks] = useState([])
   const [task, setTask] = useState("")
+  const [checked, setChecked] = useState(false)
 
   const openChecklist = () => {
     setFormPopup(true)
@@ -15,16 +16,6 @@ function Checklist({ title, number }) {
       .then((res) => {
         setTasks([])
         setTasks(res.data)
-      })
-      .catch((err) => console.log(err))
-  }
-
-  const deleteChecklist = () => {
-    setFormPopup(false)
-    axios
-      .delete(`/deletechecklist/${title}`)
-      .then((res) => {
-        console.log(res.data)
       })
       .catch((err) => console.log(err))
   }
@@ -48,6 +39,16 @@ function Checklist({ title, number }) {
       .catch((err) => {
         console.log(err)
       })
+  }
+
+  const deleteChecklist = () => {
+    setFormPopup(false)
+    axios
+      .delete(`/deletechecklist/${title}`)
+      .then((res) => {
+        console.log(res.data)
+      })
+      .catch((err) => console.log(err))
   }
 
   return (
@@ -76,7 +77,19 @@ function Checklist({ title, number }) {
             {tasks.map((element) => {
               return (
                 <div>
-                  <input key={element.id} type="checkbox" id={element.id} />
+                  <input
+                    onChange={() => {
+                      setChecked(!checked)
+                      if (checked === false) {
+                        axios.post(`/changeStatusTrue/${title}/${element.id}`)
+                      } else {
+                        axios.post(`/changeStatusFalse/${title}/${element.id}`)
+                      }
+                    }}
+                    key={element.id}
+                    type="checkbox"
+                    id={element.id}
+                  />
                   <label htmlFor={element.id}>{element.tasks}</label>
                 </div>
               )
