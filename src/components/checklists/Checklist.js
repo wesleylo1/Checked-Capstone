@@ -7,7 +7,6 @@ function Checklist({ title, number }) {
   const [formPopup, setFormPopup] = useState(false)
   const [tasks, setTasks] = useState([])
   const [task, setTask] = useState("")
-  const [checked, setChecked] = useState([null])
 
   const openChecklist = () => {
     setFormPopup(true)
@@ -59,7 +58,6 @@ function Checklist({ title, number }) {
             <button
               onClick={() => {
                 setTasks([])
-                setChecked([null])
                 setFormPopup(false)
               }}
               className="form-button"
@@ -82,8 +80,6 @@ function Checklist({ title, number }) {
 
           <ul>
             {tasks.map((element) => {
-              // let num = element.id
-              // setChecked(element.completion)
               return (
                 <div>
                   <input
