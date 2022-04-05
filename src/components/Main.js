@@ -12,7 +12,7 @@ function Main() {
     name: "",
     email: ""
   })
-  let currentuserId
+  let currentuserId = ""
 
   useEffect(() => {
     let u = localStorage.getItem("user")

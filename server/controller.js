@@ -22,6 +22,7 @@ module.exports = {
     try {
       let info = await sequelize.query(`
       SELECT * FROM users WHERE email = '${email}'
+      ORDER BY id ASC
     `)
 
       let userObj = {
@@ -94,6 +95,7 @@ module.exports = {
     let items = await sequelize.query(`
       SELECT tasks,completion,id FROM ${listTitle}
       WHERE users_id_${id} = ${id}
+      ORDER BY id ASC
     `)
     res.status(200).send(items[0])
   },
@@ -114,6 +116,7 @@ module.exports = {
     let items = await sequelize.query(`
         SELECT tasks,completion,id FROM ${title}
         WHERE users_id_${id} = ${id}
+        ORDER BY id ASC
       `)
 
     res.status(200).send(items[0])
@@ -138,6 +141,7 @@ module.exports = {
     let items = await sequelize.query(`
       SELECT tasks,completion,id FROM ${title}
       WHERE users_id_${number} = ${number}
+      ORDER BY id ASC
     `)
     res.status(200).send(items[0])
   },

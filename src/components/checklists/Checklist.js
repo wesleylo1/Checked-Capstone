@@ -7,7 +7,7 @@ function Checklist({ title, number }) {
   const [formPopup, setFormPopup] = useState(false)
   const [tasks, setTasks] = useState([])
   const [task, setTask] = useState("")
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState([null])
 
   const openChecklist = () => {
     setFormPopup(true)
@@ -56,7 +56,14 @@ function Checklist({ title, number }) {
       {formPopup ? (
         <div className="checklist-modal">
           <div className="button-box">
-            <button onClick={() => setFormPopup(false)} className="form-button">
+            <button
+              onClick={() => {
+                setTasks([])
+                setChecked([null])
+                setFormPopup(false)
+              }}
+              className="form-button"
+            >
               x
             </button>
           </div>
@@ -75,26 +82,47 @@ function Checklist({ title, number }) {
 
           <ul>
             {tasks.map((element) => {
+              // let num = element.id
+              // setChecked(element.completion)
               return (
                 <div>
                   <input
                     onChange={() => {
-                      setChecked(!checked)
-                      if (checked === false) {
-                        axios.post(`/changeStatusTrue/${title}/${element.id}`)
-                      } else {
-                        axios.post(`/changeStatusFalse/${title}/${element.id}`)
+                      if (
+                        document.getElementById(`${element.id}`).checked ===
+                        true
+                      ) {
+                        console.log(`${element.id} checked`)
+                        axios
+                          .put(`/changeStatusTrue/${title}/${element.id}`)
+                          .then((res) => {
+                            console.log(res.data)
+                          })
+                          .catch((error) => console.log(error))
+                      } else if (
+                        document.getElementById(`${element.id}`).checked ===
+                        false
+                      ) {
+                        console.log(`${element.id} unchecked`)
+                        axios
+                          .put(`/changeStatusFalse/${title}/${element.id}`)
+                          .then((res) => {
+                            console.log(res.data)
+                          })
+                          .catch((error) => console.log(error))
                       }
                     }}
                     key={element.id}
                     type="checkbox"
                     id={element.id}
+                    defaultChecked={element.completion}
                   />
                   <label htmlFor={element.id}>{element.tasks}</label>
                 </div>
               )
             })}
           </ul>
+
           <button onClick={deleteChecklist}>Delete</button>
         </div>
       ) : (
