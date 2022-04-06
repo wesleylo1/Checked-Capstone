@@ -27,19 +27,31 @@ app.use(cors())
 app.use(express.static(path.join(__dirname, "/public")))
 
 // Put endpoints here
+
+// NewUserModal.js
 app.post("/register", registerUser)
+
+// Login.js
 app.post("/login", loginUser)
-app.get("/getChecklists/:id", getChecklist)
+
+// UserAccount.js
+app.delete("/delete/:id", deleteUser)
+app.get("/getChecklists/:id", getChecklist) // also in Checklist.js
 app.post("/newlist/:id", newChecklist)
-app.post("/newtask", createNewTask)
-app.get("/getTasks/:id/:listTitle", getTasks)
-app.delete("/deletechecklist/:listTitle", deleteChecklist)
+
+// Checklist.js
 app.get("/checklist/:id/:title", selectChecklist)
-app.post("/:title/newtask", addTask)
 app.get("/gettasks/:id/:title", receiveTasks)
+app.post("/:title/newtask", addTask)
+app.delete("/deletechecklist/:listTitle", deleteChecklist)
 app.put("/changeStatusTrue/:title/:id", changeTrue)
 app.put("/changeStatusFalse/:title/:id", changeFalse)
-app.delete("/delete/:id", deleteUser)
+
+// NewChecklistModal.js
+app.post("/newtask", createNewTask)
+app.get("/getTasks/:id/:listTitle", getTasks)
+
+// Navbar.js
 app.put("/email/:id", changeEmail)
 
 app.listen(PORT, () => console.log(`server running on ${PORT}`))

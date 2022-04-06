@@ -25,6 +25,7 @@ function Navbar({ logout, deleteAcct, id }) {
 
   return (
     <div className="navbar">
+      {/* Popup start */}
       {formPopup ? (
         <div className="emailPopup">
           <div className="button-box">
@@ -52,6 +53,7 @@ function Navbar({ logout, deleteAcct, id }) {
       ) : (
         ""
       )}
+      {/* Popup End */}
       <div className="dropdown">
         <button className="dropbtn">Settings</button>
         <div className="dropdown-content">

@@ -46,7 +46,6 @@ function UserAccount({ currentuser, setAuth }) {
       })
       .catch((err) => console.log(err))
   }, [currentuser.id, formPopup, setFormPopup])
-  // [currentuser.id, formPopup, setFormPopup]
 
   useEffect(() => {
     return () => {
