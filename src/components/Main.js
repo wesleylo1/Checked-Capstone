@@ -12,7 +12,7 @@ function Main() {
     name: "",
     email: ""
   })
-  let currentuserId = ""
+  // let currentuserId = ""
 
   useEffect(() => {
     let u = localStorage.getItem("user")
@@ -27,7 +27,7 @@ function Main() {
     const userName = info.name
     const userId = info.id
     const userEmail = info.email
-    currentuserId = info.id
+    // const currentuserId = info.id
     setUser({ id: userId, name: userName, email: userEmail })
   }
 

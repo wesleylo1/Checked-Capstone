@@ -2,6 +2,7 @@ import axios from "axios"
 import React, { useState } from "react"
 import "../styles/Login.css"
 import { useNavigate } from "react-router-dom"
+import { TextField } from "@mui/material"
 
 function Login({ setUserHandler, authenticate }) {
   let navigate = useNavigate()
@@ -50,31 +51,35 @@ function Login({ setUserHandler, authenticate }) {
 
   return (
     <div className="login">
-      <form action="">
-        <p>
-          Email:
-          <input
-            value={email}
-            name="email"
-            type="email"
-            onChange={handleEmailChange}
-            autoFocus
-          />
-        </p>
-        <p>
-          Password:
-          <input
-            value={password}
-            name="password"
-            type="password"
-            onChange={handlePasswordChange}
-          />
-        </p>
-        {/* <Link to="/user"> */}
+      <form className="login-form">
+        <TextField
+          className="login-input"
+          id="outlined-basic"
+          label="Email"
+          variant="outlined"
+          value={email}
+          name="email"
+          type="email"
+          onChange={handleEmailChange}
+          autoFocus
+          required
+        />
+
+        <TextField
+          className="login-input"
+          id="outlined-basic"
+          label="Password"
+          variant="outlined"
+          value={password}
+          name="password"
+          type="password"
+          onChange={handlePasswordChange}
+          required
+        />
+
         <button className="login-button" onClick={showInfo}>
           Log In
         </button>
-        {/* </Link> */}
       </form>
     </div>
   )

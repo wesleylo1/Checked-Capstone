@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import "../../styles/Checklist.css"
 import "../../styles/ChecklistModal.css"
 
-function Checklist({ title, number }) {
+function Checklist({ title, id, setChecklists }) {
   const [formPopup, setFormPopup] = useState(false)
   const [tasks, setTasks] = useState([])
   const [task, setTask] = useState("")
@@ -11,7 +11,7 @@ function Checklist({ title, number }) {
   const openChecklist = () => {
     setFormPopup(true)
     axios
-      .get(`/checklist/${number}/${title}`)
+      .get(`/checklist/${id}/${title}`)
       .then((res) => {
         setTasks([])
         setTasks(res.data)
@@ -31,7 +31,7 @@ function Checklist({ title, number }) {
       .catch((err) => console.log(err))
 
     await axios
-      .get(`/gettasks/${number}/${title}`)
+      .get(`/gettasks/${id}/${title}`)
       .then((res) => {
         setTasks(res.data)
       })
@@ -41,13 +41,15 @@ function Checklist({ title, number }) {
   }
 
   const deleteChecklist = () => {
-    setFormPopup(false)
+    axios.delete(`/deletechecklist/${title}`)
+
     axios
-      .delete(`/deletechecklist/${title}`)
+      .get(`/getChecklists/${id}`)
       .then((res) => {
-        console.log(res.data)
+        setChecklists(res.data)
+        setFormPopup(false)
       })
-      .catch((err) => console.log(err))
+      .catch((error) => console.log(error))
   }
 
   return (
@@ -113,7 +115,10 @@ function Checklist({ title, number }) {
                     id={element.id}
                     defaultChecked={element.completion}
                   />
-                  <label htmlFor={element.id}>{element.tasks}</label>
+                  <label key={element.id} htmlFor={element.id}>
+                    {element.tasks}
+                  </label>
+                  <button>edit</button>
                 </div>
               )
             })}

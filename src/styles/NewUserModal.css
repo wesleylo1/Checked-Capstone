@@ -14,10 +14,9 @@
   cursor: pointer;
   height: 2em;
   width: 2em;
-  background-color: #79b4b7;
   border: none;
-  color: #ffe3e3;
-  outline: 1px solid #9d9d9d;
+  background-color: #79B4B7;
+  color: #FFE3E3;
   box-shadow: 1px 1px 1px 1px grey;
 }
 
@@ -30,9 +29,10 @@
 }
 
 .new-user {
-  position: fixed;
-  top: 7em;
-  left: 40em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding-left: 4em;
   padding-right: 4em;
   padding-bottom: 4em;
@@ -48,8 +48,8 @@
   align-items: left;
 }
 
-form p {
-  padding: 2em;
+form .input {
+  margin: 2em;
 }
 
 form .new-button {
@@ -59,14 +59,15 @@ form .new-button {
   padding: 0.5em 1.5em;
   border-radius: 20px;
   border: none;
-  color: #ffe3e3;
   box-shadow: 1px 1px 1px 1px grey;
-  outline: 1px solid #9d9d9d;
-  background-color: #79b4b7;
+  background-color: #79B4B7;
+  color: #FFE3E3;
+  margin: 2em;
 }
 
 form .new-button:hover {
   color: black;
+  background-color: #79B4B7;
 }
 
 form .new-button:active {
@@ -74,6 +75,6 @@ form .new-button:active {
 }
 
 h6 {
-  margin-top: 2em;
+  margin-top: 4em;
   margin: 0 auto;
 }

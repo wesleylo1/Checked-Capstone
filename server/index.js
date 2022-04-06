@@ -16,7 +16,9 @@ const {
   addTask,
   receiveTasks,
   changeTrue,
-  changeFalse
+  changeFalse,
+  deleteUser,
+  changeEmail
 } = require("./controller")
 
 // Middleware
@@ -37,5 +39,7 @@ app.post("/:title/newtask", addTask)
 app.get("/gettasks/:id/:title", receiveTasks)
 app.put("/changeStatusTrue/:title/:id", changeTrue)
 app.put("/changeStatusFalse/:title/:id", changeFalse)
+app.delete("/delete/:id", deleteUser)
+app.put("/email/:id", changeEmail)
 
 app.listen(PORT, () => console.log(`server running on ${PORT}`))

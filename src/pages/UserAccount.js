@@ -17,6 +17,17 @@ function UserAccount({ currentuser, setAuth }) {
   const [newTitle, setNewTitle] = useState("")
   const navigate = useNavigate()
 
+  const deleteAcct = () => {
+    axios
+      .delete(`/delete/${currentuser.id}`)
+      .then((res) => {
+        alert(res.data)
+        setAuth(null)
+        navigate("/")
+      })
+      .catch((error) => console.log(error))
+  }
+
   const logout = () => {
     setAuth(null)
     navigate("/")
@@ -57,7 +68,7 @@ function UserAccount({ currentuser, setAuth }) {
 
   return (
     <div className="useraccount">
-      <Navbar logout={logout} />
+      <Navbar logout={logout} deleteAcct={deleteAcct} id={currentuser.id} />
       <h1>Welcome {capsFirstName}! </h1>
       <NewChecklistModal
         id={currentuser.id}
@@ -69,7 +80,8 @@ function UserAccount({ currentuser, setAuth }) {
         {checklists.map((element) => {
           return (
             <Checklist
-              number={currentuser.id}
+              setChecklists={setChecklists}
+              id={currentuser.id}
               task={element.tasks}
               title={element.table_name}
               completion

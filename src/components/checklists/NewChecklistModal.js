@@ -89,6 +89,7 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
                 id={element.id}
               />
               <label htmlFor={element.id}>{element.tasks}</label>
+              <button>edit</button>
             </div>
           )
         })}

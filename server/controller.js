@@ -102,11 +102,12 @@ module.exports = {
 
   deleteChecklist: async (req, res) => {
     let { listTitle } = req.params
+
     try {
       sequelize.query(`
         DROP TABLE ${listTitle}
       `)
-      res.status(200).send("done")
+      res.status(200)
     } catch {}
   },
 
@@ -166,5 +167,31 @@ module.exports = {
       WHERE id = ${id}
     `)
     res.status(200).status("complete")
+  },
+
+  deleteUser: async (req, res) => {
+    let { id } = req.params
+
+    try {
+      sequelize.query(`
+        DELETE FROM users
+        WHERE id = ${id}
+      `)
+    } catch {}
+    res.status(200).send("account deleted")
+  },
+
+  changeEmail: async (req, res) => {
+    let { id } = req.params
+    let { email } = req.body
+    try {
+      sequelize.query(`
+        UPDATE users
+        SET email = '${email}'
+        WHERE id = ${id}
+      `)
+
+      res.status(200).send("email changed")
+    } catch {}
   }
 }

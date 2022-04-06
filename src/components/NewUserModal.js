@@ -1,3 +1,4 @@
+import { Button, TextField } from "@mui/material"
 import axios from "axios"
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
@@ -104,54 +105,67 @@ function NewUserModal({ trigger, setTrigger }) {
           x
         </button>
       </div>
-      <form className="form" action="">
-        <p>
-          First Name:
-          <input
-            value={firstName}
-            name="firstName"
-            onChange={handleFirstChange}
-            type="text"
-            autoFocus
-          />
-        </p>
-        <p>
-          Last Name:
-          <input
-            value={lastName}
-            name="lastName"
-            type="text"
-            onChange={handleLastChange}
-          />
-        </p>
-        <p>
-          Email*:
-          <input
-            value={email}
-            name="email"
-            type="email"
-            onChange={handleEmailChange}
-          />
-        </p>
+      <form className="form">
+        <TextField
+          className="input"
+          id="outlined-basic"
+          label="First Name"
+          variant="outlined"
+          value={firstName}
+          name="firstName"
+          onChange={handleFirstChange}
+          type="text"
+          autoFocus
+        />
+
+        <TextField
+          className="input"
+          id="outlined-basic"
+          label="Last Name"
+          variant="outlined"
+          value={lastName}
+          name="lastName"
+          type="text"
+          onChange={handleLastChange}
+        />
+
+        <TextField
+          className="input"
+          id="outlined-basic"
+          label="Email"
+          variant="outlined"
+          value={email}
+          name="email"
+          type="email"
+          onChange={handleEmailChange}
+          required
+        />
         {Object.keys(emailError).map((key) => {
           return <div style={{ color: "red" }}>{emailError[key]}</div>
         })}
-        <p>
-          Password*:
-          <input
-            value={password}
-            name="password"
-            type="password"
-            onChange={handlePasswordChange}
-          />
-        </p>
+        <TextField
+          className="input"
+          id="outlined-basic"
+          label="Password"
+          variant="outlined"
+          value={password}
+          name="password"
+          type="password"
+          onChange={handlePasswordChange}
+          required
+        />
         {Object.keys(passwordError).map((key) => {
           return <div style={{ color: "red" }}>{passwordError[key]}</div>
         })}
-        <button onClick={addUser} className="new-button">
+        <Button
+          size="medium"
+          variant="contained"
+          onClick={addUser}
+          className="new-button"
+        >
           Submit
-        </button>
-        <h6>* is required</h6>
+        </Button>
+        <h6>* required</h6>
       </form>
     </div>
   ) : (

@@ -16,7 +16,7 @@ function Home() {
       <h1>Checked!</h1>
 
       <Link to="/login">
-        <button>Log in</button>
+        <button className="login-btn">Log in</button>
       </Link>
       <button onClick={newCard}>New User?</button>
     </div>

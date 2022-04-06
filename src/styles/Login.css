@@ -1,37 +1,31 @@
 .login {
+  background-color: #fefbf3;
   display: flex;
   justify-content: center;
-  margin-top: 5em;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
 }
 
-form > p {
-  display: inline;
-  margin-right: 5em;
+.login-form {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
 }
 
-form > p:nth-child(2) {
-  margin-right: 2em;
-}
-
-form > p:last-child {
-  margin-right: 0;
-}
-
-form input {
-  outline: none;
-  border: none;
-  border-bottom: 1px solid #000000;
-  background: transparent;
-  text-indent: 10px;
-}
 
 form > .login-button {
   cursor: pointer;
-  background: transparent;
   outline: 1px solid #9d9d9d;
   background-color: #79b4b7;
   color: #ffe3e3;
   border: none;
-  padding: 0.5em 1em;
+  padding: 1em 2em;
   border-radius: 10px;
+}
+
+form .login-input {
+  margin: 2em;
 }

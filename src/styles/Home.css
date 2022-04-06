@@ -12,5 +12,20 @@
   border: none;
   background: transparent;
   cursor: pointer;
-  border-bottom: 1px solid black;
+  color: #79B4B7;
+}
+
+.login-btn {
+  margin: 3em;
+  padding: 1em 2em;
+  background-color: #79B4B7;
+  border: none;
+  box-shadow: 1px 1px 1px 1px grey;
+  border-radius: 20px;
+  color: #ffe3e3;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  color: black;
 }
