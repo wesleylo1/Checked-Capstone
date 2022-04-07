@@ -137,11 +137,11 @@ module.exports = {
   },
 
   receiveTasks: async (req, res) => {
-    let { number, title } = req.params
+    let { id, title } = req.params
 
     let items = await sequelize.query(`
       SELECT tasks,completion,id FROM ${title}
-      WHERE users_id_${number} = ${number}
+      WHERE users_id_${id} = ${id}
       ORDER BY id ASC
     `)
     res.status(200).send(items[0])

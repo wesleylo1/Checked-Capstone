@@ -41,15 +41,15 @@ function Checklist({ title, id, setChecklists }) {
   }
 
   const deleteChecklist = () => {
-    axios.delete(`/deletechecklist/${title}`)
-
-    axios
-      .get(`/getChecklists/${id}`)
-      .then((res) => {
-        setChecklists(res.data)
-        setFormPopup(false)
-      })
-      .catch((error) => console.log(error))
+    axios.delete(`/deletechecklist/${title}`).then(
+      axios
+        .get(`/getChecklists/${id}`)
+        .then((res) => {
+          setChecklists(res.data)
+          setFormPopup(false)
+        })
+        .catch((error) => console.log(error))
+    )
   }
 
   return (
