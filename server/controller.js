@@ -193,5 +193,19 @@ module.exports = {
 
       res.status(200).send("email changed")
     } catch {}
+  },
+
+  editTask: async (req, res) => {
+    let { id } = req.params
+    let { newTask, title, elemId } = req.body
+
+    try {
+      sequelize.query(`
+        UPDATE ${title}
+        SET tasks = '${newTask}'
+        WHERE id = ${elemId}
+      `)
+      res.status(200).send("task updated")
+    } catch {}
   }
 }

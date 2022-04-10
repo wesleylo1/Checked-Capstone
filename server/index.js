@@ -18,7 +18,8 @@ const {
   changeTrue,
   changeFalse,
   deleteUser,
-  changeEmail
+  changeEmail,
+  editTask
 } = require("./controller")
 
 // Middleware
@@ -53,5 +54,8 @@ app.get("/getTasks/:id/:listTitle", getTasks)
 
 // Navbar.js
 app.put("/email/:id", changeEmail)
+
+// Edits.js
+app.put("/editTask/:id", editTask)
 
 app.listen(PORT, () => console.log(`server running on ${PORT}`))

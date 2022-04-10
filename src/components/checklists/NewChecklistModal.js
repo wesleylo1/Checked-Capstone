@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, { useState } from "react"
 import "../../styles/NewChecklistModal.css"
+import TaskCard from "./TaskCard"
 
 function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
   const [task, setTask] = useState("")
@@ -57,40 +58,12 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
       <ul>
         {tasks.map((element) => {
           return (
-            <div>
-              <input
-                onChange={() => {
-                  if (
-                    document.getElementById(`${element.id}`).checked === true
-                  ) {
-                    console.log(`${element.id} checked`)
-                    axios
-                      .put(`/changeStatusTrue/${listTitle}/${element.id}`)
-                      .then((res) => {
-                        console.log(res.data)
-                      })
-                      .catch((error) => console.log(error))
-                  } else if (
-                    document.getElementById(`${element.id}`).checked === false
-                  ) {
-                    console.log(`${element.id} unchecked`)
-                    axios
-                      .put(`/changeStatusFalse/${listTitle}/${element.id}`)
-                      .then((res) => {
-                        console.log(res.data)
-                      })
-                      .catch((error) => console.log(error))
-                  }
-                }}
-                className="checkbox"
-                name={element.tasks}
-                key={element.id}
-                type="checkbox"
-                id={element.id}
-              />
-              <label htmlFor={element.id}>{element.tasks}</label>
-              <button>edit</button>
-            </div>
+            <TaskCard
+              element={element}
+              title={listTitle}
+              id={id}
+              setTasks={setTasks}
+            />
           )
         })}
       </ul>

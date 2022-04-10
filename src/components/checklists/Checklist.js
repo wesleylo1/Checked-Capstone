@@ -1,7 +1,7 @@
 import axios from "axios"
 import React, { useState } from "react"
 import "../../styles/Checklist.css"
-import "../../styles/ChecklistModal.css"
+import TaskCard from "./TaskCard"
 
 function Checklist({ title, id, setChecklists }) {
   const [formPopup, setFormPopup] = useState(false)
@@ -27,10 +27,22 @@ function Checklist({ title, id, setChecklists }) {
       .then((res) => {
         console.log(res.data)
         setTask("")
+        axios
+          .get(`/gettasks/${id}/${title}`)
+          .then((res) => {
+            setTasks(res.data)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+
+        console.log("complete")
       })
       .catch((err) => console.log(err))
+  }
 
-    await axios
+  const refreshTasks = () => {
+    axios
       .get(`/gettasks/${id}/${title}`)
       .then((res) => {
         setTasks(res.data)
@@ -38,6 +50,8 @@ function Checklist({ title, id, setChecklists }) {
       .catch((err) => {
         console.log(err)
       })
+
+    console.log("complete")
   }
 
   const deleteChecklist = () => {
@@ -83,43 +97,13 @@ function Checklist({ title, id, setChecklists }) {
           <ul>
             {tasks.map((element) => {
               return (
-                <div>
-                  <input
-                    onChange={() => {
-                      if (
-                        document.getElementById(`${element.id}`).checked ===
-                        true
-                      ) {
-                        console.log(`${element.id} checked`)
-                        axios
-                          .put(`/changeStatusTrue/${title}/${element.id}`)
-                          .then((res) => {
-                            console.log(res.data)
-                          })
-                          .catch((error) => console.log(error))
-                      } else if (
-                        document.getElementById(`${element.id}`).checked ===
-                        false
-                      ) {
-                        console.log(`${element.id} unchecked`)
-                        axios
-                          .put(`/changeStatusFalse/${title}/${element.id}`)
-                          .then((res) => {
-                            console.log(res.data)
-                          })
-                          .catch((error) => console.log(error))
-                      }
-                    }}
-                    key={element.id}
-                    type="checkbox"
-                    id={element.id}
-                    defaultChecked={element.completion}
-                  />
-                  <label key={element.id} htmlFor={element.id}>
-                    {element.tasks}
-                  </label>
-                  <button>edit</button>
-                </div>
+                <TaskCard
+                  element={element}
+                  title={title}
+                  id={id}
+                  setTasks={setTasks}
+                  refreshTasks={refreshTasks}
+                />
               )
             })}
           </ul>
@@ -130,7 +114,7 @@ function Checklist({ title, id, setChecklists }) {
         ""
       )}
       <div onClick={openChecklist} className="cl-box">
-        <h1>{title}</h1>
+        <h1 key={id}>{title}</h1>
       </div>
     </div>
   )

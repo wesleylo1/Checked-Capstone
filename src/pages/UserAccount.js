@@ -83,7 +83,7 @@ function UserAccount({ currentuser, setAuth }) {
               id={currentuser.id}
               task={element.tasks}
               title={element.table_name}
-              // completion
+              completion
             />
           )
         })}
