@@ -3,6 +3,7 @@ import axios from "axios"
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import "../styles/NewUserModal.css"
+import CloseIcon from "@mui/icons-material/Close"
 
 function NewUserModal({ trigger, setTrigger }) {
   const [firstName, setFirstName] = useState("")
@@ -101,12 +102,11 @@ function NewUserModal({ trigger, setTrigger }) {
   return trigger ? (
     <div className="new-user">
       <div className="button-box">
-        <button className="form-button" onClick={() => setTrigger(false)}>
-          x
-        </button>
+        <CloseIcon color="primary" onClick={() => setTrigger(false)} />
       </div>
       <form className="form">
         <TextField
+          color="secondary"
           className="input"
           id="outlined-basic"
           label="First Name"
@@ -119,6 +119,7 @@ function NewUserModal({ trigger, setTrigger }) {
         />
 
         <TextField
+          color="secondary"
           className="input"
           id="outlined-basic"
           label="Last Name"
@@ -130,6 +131,7 @@ function NewUserModal({ trigger, setTrigger }) {
         />
 
         <TextField
+          color="secondary"
           className="input"
           id="outlined-basic"
           label="Email"
@@ -144,6 +146,7 @@ function NewUserModal({ trigger, setTrigger }) {
           return <div style={{ color: "red" }}>{emailError[key]}</div>
         })}
         <TextField
+          color="secondary"
           className="input"
           id="outlined-basic"
           label="Password"
@@ -158,6 +161,8 @@ function NewUserModal({ trigger, setTrigger }) {
           return <div style={{ color: "red" }}>{passwordError[key]}</div>
         })}
         <Button
+          type="submit"
+          color="primary"
           size="medium"
           variant="contained"
           onClick={addUser}

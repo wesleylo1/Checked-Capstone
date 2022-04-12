@@ -4,6 +4,7 @@ import "../styles/Navbar.css"
 import { Button } from "@mui/material"
 import Menu from "@mui/material/Menu"
 import MenuItem from "@mui/material/MenuItem"
+import CloseIcon from "@mui/icons-material/Close"
 
 function Navbar({ logout, deleteAcct, id }) {
   const [formPopup, setFormPopup] = useState(false)
@@ -42,25 +43,25 @@ function Navbar({ logout, deleteAcct, id }) {
       {formPopup ? (
         <div className="emailPopup">
           <div className="button-box">
-            <button
+            <CloseIcon
+              color="primary"
               onClick={() => {
                 setFormPopup(false)
               }}
-              className="form-button"
-            >
-              x
-            </button>
+            />
           </div>
-          <h2>Change Email</h2>
+          <h2 style={{ marginTop: "1em" }}>New Email</h2>
           <form>
-            <label htmlFor="newEmail">New Email</label>
             <input
+              style={{ marginRight: "2em", marginTop: "2em" }}
               value={email}
               onChange={emailChange}
               name="newEmail"
               type="email"
             />
-            <button onClick={changeEmail}>Submit</button>
+            <Button type="submit" variant="contained" onClick={changeEmail}>
+              Submit
+            </Button>
           </form>
         </div>
       ) : (
@@ -68,7 +69,12 @@ function Navbar({ logout, deleteAcct, id }) {
       )}
       {/* Popup End */}
       <div className="dropdown">
-        <Button variant="contained" className="dropbtn" onClick={handleClick}>
+        <Button
+          color="primary"
+          variant="contained"
+          className="dropbtn"
+          onClick={handleClick}
+        >
           Settings
         </Button>
         <Menu

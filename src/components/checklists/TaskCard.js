@@ -63,19 +63,19 @@ function TaskCard({ element, title, id, setTasks }) {
           />
           <DeleteIcon fontSize="small" onClick={deleteTask} />
         </div>
+        {
+          <Edits
+            trigger={formPopup}
+            setTrigger={setFormPopup}
+            title={title}
+            id={id}
+            newTask={newTask}
+            setNewTask={setNewTask}
+            element={element}
+            setTasks={setTasks}
+          />
+        }
       </li>
-      {
-        <Edits
-          trigger={formPopup}
-          setTrigger={setFormPopup}
-          title={title}
-          id={id}
-          newTask={newTask}
-          setNewTask={setNewTask}
-          element={element}
-          setTasks={setTasks}
-        />
-      }
     </>
   )
 }

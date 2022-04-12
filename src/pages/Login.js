@@ -2,7 +2,7 @@ import axios from "axios"
 import React, { useState } from "react"
 import "../styles/Login.css"
 import { useNavigate } from "react-router-dom"
-import { TextField } from "@mui/material"
+import { Button, TextField } from "@mui/material"
 
 function Login({ setUserHandler, authenticate }) {
   let navigate = useNavigate()
@@ -53,6 +53,7 @@ function Login({ setUserHandler, authenticate }) {
     <div className="login">
       <form className="login-form">
         <TextField
+          color="secondary"
           className="login-input"
           id="outlined-basic"
           label="Email"
@@ -66,6 +67,7 @@ function Login({ setUserHandler, authenticate }) {
         />
 
         <TextField
+          color="secondary"
           className="login-input"
           id="outlined-basic"
           label="Password"
@@ -77,9 +79,15 @@ function Login({ setUserHandler, authenticate }) {
           required
         />
 
-        <button className="login-button" onClick={showInfo}>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className="login-button"
+          onClick={showInfo}
+        >
           Log In
-        </button>
+        </Button>
       </form>
     </div>
   )

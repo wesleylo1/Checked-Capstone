@@ -12,3 +12,18 @@ code {
     monospace;
 }
 
+input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid black;
+  outline: none;
+  text-indent: 10px;
+}
+
+input:focus {
+  border: none;
+  border-bottom: 2px solid black;
+  padding-bottom: 5px;
+  transform: scaleX(1)
+}
+

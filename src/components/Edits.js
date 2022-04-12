@@ -1,6 +1,8 @@
+import { Button } from "@mui/material"
 import axios from "axios"
 import React from "react"
 import "../styles/Edits.css"
+import CloseIcon from "@mui/icons-material/Close"
 
 function Edits({
   trigger,
@@ -49,21 +51,27 @@ function Edits({
   return trigger ? (
     <div className="editModal">
       <div className="button-box">
-        <button className="form-button" onClick={exitModal}>
-          x
-        </button>
+        <CloseIcon color="primary" onClick={exitModal} />
       </div>
-      <h2>{title}</h2>
+      <h2 style={{ marginBottom: ".5em" }}>Edit Task</h2>
       <form>
-        <label htmlFor="editCurrentTask">Edit task: '{element.tasks}'</label>
+        <label htmlFor="editCurrentTask">'{element.tasks}'</label>
         <input
+          style={{ marginTop: "2em" }}
           value={newTask}
           name="editCurrentTask"
           type="text"
           onChange={taskChange}
           autoFocus
         />
-        <button onClick={editTask}>Submit</button>
+        <Button
+          type="submit"
+          style={{ marginTop: "2em" }}
+          variant="contained"
+          onClick={editTask}
+        >
+          Submit
+        </Button>
       </form>
     </div>
   ) : (

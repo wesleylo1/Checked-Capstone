@@ -3,6 +3,7 @@ import "../styles/Home.css"
 import NewUserModal from "../components/NewUserModal"
 import { Link } from "react-router-dom"
 import { Button } from "@mui/material"
+import LoginIcon from "@mui/icons-material/Login"
 
 function Home() {
   const [formPopup, setFormPopup] = useState(false)
@@ -16,7 +17,11 @@ function Home() {
       <h1>Checked!</h1>
 
       <Link to="/login">
-        <Button variant="contained" className="login-btn">
+        <Button
+          variant="contained"
+          endIcon={<LoginIcon />}
+          className="login-btn"
+        >
           Log in
         </Button>
       </Link>

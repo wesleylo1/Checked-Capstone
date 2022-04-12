@@ -4,6 +4,7 @@ import "../../styles/NewChecklistModal.css"
 import TaskCard from "./TaskCard"
 import AddIcon from "@mui/icons-material/Add"
 import { Button } from "@mui/material"
+import CloseIcon from "@mui/icons-material/Close"
 
 function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
   const [task, setTask] = useState("")
@@ -42,19 +43,18 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
   return trigger ? (
     <div className="new-checklist-modal">
       <div className="button-box">
-        <Button className="form-button" onClick={exitModal}>
-          x
-        </Button>
+        <CloseIcon color="primary" onClick={exitModal} />
       </div>
       <h1 className="cm-title">{listTitle}</h1>
       <form>
         <input
+          style={{ marginRight: "2em", marginBottom: "2em" }}
           value={task}
           onChange={(e) => setTask(e.target.value)}
           type="text"
           autoFocus
         />
-        <Button onClick={createTask}>
+        <Button variant="contained" type="submit" onClick={createTask}>
           <AddIcon fontSize="small" /> Add task
         </Button>
       </form>

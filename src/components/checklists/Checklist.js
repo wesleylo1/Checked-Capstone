@@ -4,6 +4,7 @@ import "../../styles/Checklist.css"
 import TaskCard from "./TaskCard"
 import AddIcon from "@mui/icons-material/Add"
 import { Button } from "@mui/material"
+import CloseIcon from "@mui/icons-material/Close"
 
 function Checklist({ title, id, setChecklists }) {
   const [formPopup, setFormPopup] = useState(false)
@@ -73,27 +74,27 @@ function Checklist({ title, id, setChecklists }) {
       {formPopup ? (
         <div className="checklist-modal">
           <div className="button-box">
-            <Button
+            <CloseIcon
+              color="primary"
               onClick={() => {
                 setTasks([])
                 setFormPopup(false)
               }}
-              className="form-button"
-            >
-              x
-            </Button>
+            />
           </div>
 
           <h1>{title}</h1>
 
           <form>
             <input
+              style={{ marginRight: "2em", marginBottom: "2em" }}
               value={task}
               onChange={(e) => setTask(e.target.value)}
               type="text"
               autoFocus
             />
             <Button
+              type="submit"
               variant="contained"
               startIcon={<AddIcon fontSize="small" />}
               onClick={createTask}
@@ -116,7 +117,13 @@ function Checklist({ title, id, setChecklists }) {
             })}
           </ul>
 
-          <button onClick={deleteChecklist}>Delete</button>
+          <Button
+            style={{ marginTop: "2em" }}
+            variant="contained"
+            onClick={deleteChecklist}
+          >
+            Delete
+          </Button>
         </div>
       ) : (
         ""
