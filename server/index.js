@@ -62,4 +62,8 @@ app.put("/editTask/:id", editTask)
 // TaskCard.js
 app.delete("/deleteTask/:id/:title/:eid", deleteTask)
 
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "/public"))
+})
+
 app.listen(PORT, () => console.log(`server running on ${PORT}`))
