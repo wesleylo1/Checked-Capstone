@@ -2,6 +2,8 @@ import axios from "axios"
 import React, { useState } from "react"
 import "../../styles/NewChecklistModal.css"
 import TaskCard from "./TaskCard"
+import AddIcon from "@mui/icons-material/Add"
+import { Button } from "@mui/material"
 
 function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
   const [task, setTask] = useState("")
@@ -40,9 +42,9 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
   return trigger ? (
     <div className="new-checklist-modal">
       <div className="button-box">
-        <button className="form-button" onClick={exitModal}>
+        <Button className="form-button" onClick={exitModal}>
           x
-        </button>
+        </Button>
       </div>
       <h1 className="cm-title">{listTitle}</h1>
       <form>
@@ -52,7 +54,9 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
           type="text"
           autoFocus
         />
-        <button onClick={createTask}>Add task</button>
+        <Button onClick={createTask}>
+          <AddIcon fontSize="small" /> Add task
+        </Button>
       </form>
 
       <ul>

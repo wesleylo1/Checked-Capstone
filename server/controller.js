@@ -207,5 +207,16 @@ module.exports = {
       `)
       res.status(200).send("task updated")
     } catch {}
+  },
+
+  deleteTask: async (req, res) => {
+    let { id, title, eid } = req.params
+
+    try {
+      sequelize.query(`
+        DELETE FROM ${title}
+        WHERE id = ${eid}
+      `)
+    } catch {}
   }
 }

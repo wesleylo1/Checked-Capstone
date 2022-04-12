@@ -1,10 +1,22 @@
 import axios from "axios"
 import React, { useState } from "react"
 import "../styles/Navbar.css"
+import { Button } from "@mui/material"
+import Menu from "@mui/material/Menu"
+import MenuItem from "@mui/material/MenuItem"
 
 function Navbar({ logout, deleteAcct, id }) {
   const [formPopup, setFormPopup] = useState(false)
   const [email, setEmail] = useState("")
+  const [anchorEl, setAnchorEl] = useState(null)
+
+  const open = Boolean(anchorEl)
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
 
   const emailChange = (e) => {
     setEmail(e.target.value)
@@ -12,6 +24,7 @@ function Navbar({ logout, deleteAcct, id }) {
 
   const openEmail = () => {
     setFormPopup(true)
+    handleClose()
   }
 
   const changeEmail = (e) => {
@@ -55,12 +68,22 @@ function Navbar({ logout, deleteAcct, id }) {
       )}
       {/* Popup End */}
       <div className="dropdown">
-        <button className="dropbtn">Settings</button>
-        <div className="dropdown-content">
-          <button onClick={deleteAcct}>Delete Account</button>
-          <button onClick={openEmail}>Change Email</button>
-          <button onClick={logout}>Logout</button>
-        </div>
+        <Button variant="contained" className="dropbtn" onClick={handleClick}>
+          Settings
+        </Button>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button"
+          }}
+        >
+          <MenuItem onClick={deleteAcct}>Delete Account</MenuItem>
+          <MenuItem onClick={openEmail}>Change Email</MenuItem>
+          <MenuItem onClick={logout}>Logout</MenuItem>
+        </Menu>
       </div>
     </div>
   )

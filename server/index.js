@@ -19,7 +19,8 @@ const {
   changeFalse,
   deleteUser,
   changeEmail,
-  editTask
+  editTask,
+  deleteTask
 } = require("./controller")
 
 // Middleware
@@ -57,5 +58,8 @@ app.put("/email/:id", changeEmail)
 
 // Edits.js
 app.put("/editTask/:id", editTask)
+
+// TaskCard.js
+app.delete("/deleteTask/:id/:title/:eid", deleteTask)
 
 app.listen(PORT, () => console.log(`server running on ${PORT}`))

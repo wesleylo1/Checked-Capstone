@@ -2,6 +2,8 @@ import axios from "axios"
 import React, { useState } from "react"
 import "../../styles/Checklist.css"
 import TaskCard from "./TaskCard"
+import AddIcon from "@mui/icons-material/Add"
+import { Button } from "@mui/material"
 
 function Checklist({ title, id, setChecklists }) {
   const [formPopup, setFormPopup] = useState(false)
@@ -71,7 +73,7 @@ function Checklist({ title, id, setChecklists }) {
       {formPopup ? (
         <div className="checklist-modal">
           <div className="button-box">
-            <button
+            <Button
               onClick={() => {
                 setTasks([])
                 setFormPopup(false)
@@ -79,7 +81,7 @@ function Checklist({ title, id, setChecklists }) {
               className="form-button"
             >
               x
-            </button>
+            </Button>
           </div>
 
           <h1>{title}</h1>
@@ -91,7 +93,13 @@ function Checklist({ title, id, setChecklists }) {
               type="text"
               autoFocus
             />
-            <button onClick={createTask}>Add task</button>
+            <Button
+              variant="contained"
+              startIcon={<AddIcon fontSize="small" />}
+              onClick={createTask}
+            >
+              Add task
+            </Button>
           </form>
 
           <ul>
@@ -114,7 +122,7 @@ function Checklist({ title, id, setChecklists }) {
         ""
       )}
       <div onClick={openChecklist} className="cl-box">
-        <h1 key={id}>{title}</h1>
+        <h1 key={id.toString()}>{title}</h1>
       </div>
     </div>
   )
