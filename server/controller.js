@@ -196,7 +196,6 @@ module.exports = {
   },
 
   editTask: async (req, res) => {
-    let { id } = req.params
     let { newTask, title, elemId } = req.body
 
     try {
@@ -210,7 +209,7 @@ module.exports = {
   },
 
   deleteTask: async (req, res) => {
-    let { id, title, eid } = req.params
+    let { title, eid } = req.params
 
     try {
       sequelize.query(`
