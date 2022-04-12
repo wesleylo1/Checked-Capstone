@@ -33,20 +33,20 @@ function Edits({
         elemId: element.id
       })
       .then((res) => {
+        axios
+          .get(`/getTasks/${id}/${title}`)
+          .then((res) => {
+            let info = res.data
+            setTasks(info)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
         alert(res.data)
         setNewTask("")
         setTrigger(false)
       })
       .catch((error) => console.log(error))
-    axios
-      .get(`/getTasks/${id}/${title}`)
-      .then((res) => {
-        let info = res.data
-        setTasks(info)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
   }
   return trigger ? (
     <div className="editModal">

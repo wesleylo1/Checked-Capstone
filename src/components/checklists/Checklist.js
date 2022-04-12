@@ -10,6 +10,7 @@ function Checklist({ title, id, setChecklists }) {
   const [formPopup, setFormPopup] = useState(false)
   const [tasks, setTasks] = useState([])
   const [task, setTask] = useState("")
+  const [boolean, setBoolean] = useState(false)
 
   const openChecklist = () => {
     setFormPopup(true)
@@ -21,6 +22,19 @@ function Checklist({ title, id, setChecklists }) {
       })
       .catch((err) => console.log(err))
   }
+
+  // useEffect(() => {
+  //   console.log("useEffect fired")
+  //   axios
+  //     .get(`/getTasks/${id}/${title}`)
+  //     .then((res) => {
+  //       let info = res.data
+  //       setTasks(info)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }, [boolean, id, setTasks, title])
 
   const createTask = async (e) => {
     e.preventDefault()
@@ -107,6 +121,11 @@ function Checklist({ title, id, setChecklists }) {
             {tasks.map((element) => {
               return (
                 <TaskCard
+                  tasks={tasks}
+                  boolean={boolean}
+                  setBoolean={setBoolean}
+                  key={element.id}
+                  taskCardId={element.id}
                   element={element}
                   title={title}
                   id={id}

@@ -5,21 +5,22 @@ import EditIcon from "@mui/icons-material/Edit"
 import DeleteIcon from "@mui/icons-material/Delete"
 import { Checkbox } from "@mui/material"
 
-function TaskCard({ element, title, id, setTasks }) {
+function TaskCard({
+  element,
+  title,
+  id,
+  tasks,
+  taskCardId,
+  setTasks,
+  boolean,
+  setBoolean
+}) {
   const [newTask, setNewTask] = useState("")
   const [formPopup, setFormPopup] = useState(false)
 
   const deleteTask = () => {
+    setTasks(tasks.filter((element) => element.id !== taskCardId))
     axios.delete(`/deleteTask/${id}/${title}/${element.id}`)
-    axios
-      .get(`/getTasks/${id}/${title}`)
-      .then((res) => {
-        let info = res.data
-        setTasks(info)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
   }
 
   return (
@@ -51,7 +52,7 @@ function TaskCard({ element, title, id, setTasks }) {
               }
             }}
             type="checkbox"
-            id={element.id}
+            id={element.id.toString()}
             defaultChecked={element.completion}
           />
           <label htmlFor={element.id}>{element.tasks}</label>

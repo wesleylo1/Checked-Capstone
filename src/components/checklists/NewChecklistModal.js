@@ -21,18 +21,17 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
       .post("/newtask", info)
       .then((res) => {
         console.log(res.data)
+        axios
+          .get(`/getTasks/${id}/${listTitle}`)
+          .then((res) => {
+            setTasks(res.data)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
         setTask("")
       })
       .catch((err) => console.log(err))
-
-    await axios
-      .get(`/getTasks/${id}/${listTitle}`)
-      .then((res) => {
-        setTasks(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
   }
 
   const exitModal = () => {
@@ -63,6 +62,7 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
         {tasks.map((element) => {
           return (
             <TaskCard
+              key={element.id}
               element={element}
               title={listTitle}
               id={id}

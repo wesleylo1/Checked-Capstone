@@ -79,11 +79,11 @@ function UserAccount({ currentuser, setAuth }) {
         {checklists.map((element) => {
           return (
             <Checklist
+              key={element.id}
               setChecklists={setChecklists}
               id={currentuser.id}
               task={element.tasks}
               title={element.table_name}
-              completion
             />
           )
         })}
