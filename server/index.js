@@ -26,11 +26,6 @@ const {
 // Middleware
 app.use(express.json())
 app.use(cors())
-app.use(express.static(path.resolve(__dirname, "../build")))
-
-app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "../build", "index.html"))
-})
 
 // Put endpoints here
 
@@ -65,6 +60,11 @@ app.put("/editTask/:id", editTask)
 
 // TaskCard.js
 app.delete("/deleteTask/:id/:title/:eid", deleteTask)
+
+app.use(express.static(path.resolve(__dirname, "../build")))
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../build", "index.html"))
+})
 
 const PORT = process.env.PORT || SERVER_PORT
 
