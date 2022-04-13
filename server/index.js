@@ -3,7 +3,7 @@ const express = require("express")
 const path = require("path")
 const cors = require("cors")
 const app = express()
-const PORT = process.env.PORT || 4000
+let { SERVER_PORT } = process.env
 const {
   registerUser,
   loginUser,
@@ -26,7 +26,11 @@ const {
 // Middleware
 app.use(express.json())
 app.use(cors())
-app.use(express.static(path.join(__dirname, "/public")))
+app.use(express.static("public"))
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/index.html"))
+})
 
 // Put endpoints here
 
@@ -62,8 +66,6 @@ app.put("/editTask/:id", editTask)
 // TaskCard.js
 app.delete("/deleteTask/:id/:title/:eid", deleteTask)
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"))
-})
+const port = process.env.PORT || SERVER_PORT
 
-app.listen(PORT, () => console.log(`server running on ${PORT}`))
+app.listen(port, () => console.log(`server running on ${port}`))
