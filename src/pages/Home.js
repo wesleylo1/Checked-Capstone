@@ -4,8 +4,9 @@ import NewUserModal from "../components/NewUserModal"
 import { Link } from "react-router-dom"
 import { Button } from "@mui/material"
 import LoginIcon from "@mui/icons-material/Login"
+import Switch from "@mui/material/Switch"
 
-function Home() {
+function Home({ theme, toggleTheme }) {
   const [formPopup, setFormPopup] = useState(false)
 
   function newCard() {
@@ -13,7 +14,7 @@ function Home() {
   }
 
   return (
-    <div className="home">
+    <div className="home" id={theme}>
       <h1>Checked!</h1>
 
       <Link to="/login">
@@ -25,10 +26,17 @@ function Home() {
           Log in
         </Button>
       </Link>
-      <Button color="primary" onClick={newCard}>
+      <Button variant="outlined" color="primary" onClick={newCard}>
         New User?
       </Button>
       <NewUserModal trigger={formPopup} setTrigger={setFormPopup} />
+
+      <div className="switch">
+        <div className="switchTwo">
+          <label>{theme === "light" ? "Light Mode" : "Dark Mode"}</label>
+          <Switch onChange={toggleTheme} checked={theme === "dark"} />
+        </div>
+      </div>
     </div>
   )
 }

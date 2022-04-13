@@ -1,9 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-function ErrorPage() {
+function ErrorPage({ theme }) {
   return (
-    <div>
+    <div id={theme}>
       <h1>
         Oops! Click <Link to="/">here</Link> to go back to the home page
       </h1>

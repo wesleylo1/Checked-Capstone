@@ -3,8 +3,9 @@ import React, { useState } from "react"
 import "../styles/Login.css"
 import { useNavigate } from "react-router-dom"
 import { Button, TextField } from "@mui/material"
+import Switch from "@mui/material/Switch"
 
-function Login({ setUserHandler, authenticate }) {
+function Login({ setUserHandler, authenticate, theme, toggleTheme }) {
   let navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -50,7 +51,7 @@ function Login({ setUserHandler, authenticate }) {
   }
 
   return (
-    <div className="login">
+    <div className="login" id={theme}>
       <form className="login-form">
         <TextField
           color="secondary"
@@ -89,6 +90,12 @@ function Login({ setUserHandler, authenticate }) {
           Log In
         </Button>
       </form>
+      <div className="switch">
+        <div className="switchTwo">
+          <label>{theme === "light" ? "Light Mode" : "Dark Mode"}</label>
+          <Switch onChange={toggleTheme} checked={theme === "dark"} />
+        </div>
+      </div>
     </div>
   )
 }

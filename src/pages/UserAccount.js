@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react"
-import "../styles/UserAccount.css"
 import Navbar from "../components/Navbar"
 import { useParams } from "react-router-dom"
 import Checklist from "../components/checklists/Checklist"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import NewChecklistModal from "../components/checklists/NewChecklistModal"
+import Switch from "@mui/material/Switch"
 import "../styles/UserAccount.css"
 
-function UserAccount({ currentuser, setAuth }) {
+function UserAccount({ currentuser, setAuth, theme, toggleTheme }) {
   let { firstName } = useParams()
   let capsFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1)
   const [checklists, setChecklists] = useState([])
@@ -66,7 +66,7 @@ function UserAccount({ currentuser, setAuth }) {
   }
 
   return (
-    <div className="useraccount">
+    <div className="useraccount" id={theme}>
       <Navbar logout={logout} deleteAcct={deleteAcct} id={currentuser.id} />
       <h1>Welcome {capsFirstName}! </h1>
       <NewChecklistModal
@@ -101,6 +101,12 @@ function UserAccount({ currentuser, setAuth }) {
           </form>
         </div>
       </main>
+      <div className="switches">
+        <div className="switchesTwo">
+          <label>{theme === "light" ? "Light Mode" : "Dark Mode"}</label>
+          <Switch onChange={toggleTheme} checked={theme === "dark"} />
+        </div>
+      </div>
     </div>
   )
 }

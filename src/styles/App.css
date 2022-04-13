@@ -1,3 +1,29 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#light {
+  background-color: #fefbf3;
+}
+
+#dark {
+  background-color: rgb(145, 145, 145);
+}
+
+#dark .switch label {
+  color: white;
+}
+
+#dark .switches label {
+  color: white;
+}
+
+#dark h1 {
+  color: white;
+}
+
 .app {
   background-color: #fefbf3;
   display: flex;
@@ -13,4 +39,17 @@
   background: transparent;
   cursor: pointer;
   border-bottom: 1px solid black;
+}
+
+
+.switch {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.switchTwo {
+  margin-top: auto;
+  margin-bottom: 2em;
 }

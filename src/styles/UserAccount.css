@@ -1,31 +1,38 @@
 .useraccount {
-  display: relative;
-  background-color: #fefbf3;
-  height: 100vh;
+display: relative;
+background-color: #fefbf3;
+/* height: 100vh; */
 }
 
 .useraccount > h1 {
-  text-align: center;
+text-align: center;
 }
 
 .checklist-rectangle {
-  width: 200px;
-  height: 300px;
-  background-color: lightblue;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 2em;
-  border-radius: 20px;
+width: 200px;
+height: 300px;
+background-color: lightblue;
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 2em;
+border-radius: 20px;
 }
 
+
 .checklist-add-nl {
-  background: transparent;
-  border: none;
+background: transparent;
+border: none;
 }
 
 .cl-main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
+display: flex;
+flex-wrap: wrap;
+justify-content: left;
+height: 82vh;
+}
+
+.switchesTwo {
+    text-align: center;
+    padding-bottom: 2em;
 }

@@ -23,19 +23,6 @@ function Checklist({ title, id, setChecklists }) {
       .catch((err) => console.log(err))
   }
 
-  // useEffect(() => {
-  //   console.log("useEffect fired")
-  //   axios
-  //     .get(`/getTasks/${id}/${title}`)
-  //     .then((res) => {
-  //       let info = res.data
-  //       setTasks(info)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // }, [boolean, id, setTasks, title])
-
   const createTask = async (e) => {
     e.preventDefault()
 
@@ -97,7 +84,7 @@ function Checklist({ title, id, setChecklists }) {
             />
           </div>
 
-          <h1>{title}</h1>
+          <h2>{title}</h2>
 
           <form>
             <input
@@ -148,7 +135,7 @@ function Checklist({ title, id, setChecklists }) {
         ""
       )}
       <div onClick={openChecklist} className="cl-box">
-        <h1 key={id.toString()}>{title}</h1>
+        <h2 key={id.toString()}>{title}</h2>
       </div>
     </div>
   )

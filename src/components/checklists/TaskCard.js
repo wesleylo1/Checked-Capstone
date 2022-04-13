@@ -5,16 +5,7 @@ import EditIcon from "@mui/icons-material/Edit"
 import DeleteIcon from "@mui/icons-material/Delete"
 import { Checkbox } from "@mui/material"
 
-function TaskCard({
-  element,
-  title,
-  id,
-  tasks,
-  taskCardId,
-  setTasks,
-  boolean,
-  setBoolean
-}) {
+function TaskCard({ element, title, id, tasks, taskCardId, setTasks }) {
   const [newTask, setNewTask] = useState("")
   const [formPopup, setFormPopup] = useState(false)
 
@@ -55,8 +46,11 @@ function TaskCard({
             id={element.id.toString()}
             defaultChecked={element.completion}
           />
-          <label htmlFor={element.id}>{element.tasks}</label>
+          <label style={{ marginRight: "1em" }} htmlFor={element.id}>
+            {element.tasks}
+          </label>
           <EditIcon
+            style={{ marginRight: ".5em" }}
             fontSize="small"
             onClick={() => {
               setFormPopup(true)

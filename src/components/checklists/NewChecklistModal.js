@@ -44,7 +44,7 @@ function ChecklistModal({ trigger, setTrigger, listTitle, id }) {
       <div className="button-box">
         <CloseIcon color="primary" onClick={exitModal} />
       </div>
-      <h1 className="cm-title">{listTitle}</h1>
+      <h2 className="cm-title">{listTitle}</h2>
       <form>
         <input
           style={{ marginRight: "2em", marginBottom: "2em" }}

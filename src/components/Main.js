@@ -5,14 +5,13 @@ import UserAccount from "../pages/UserAccount"
 import ErrorPage from "../pages/ErrorPage"
 import Login from "../pages/Login"
 
-function Main() {
+function Main({ theme, toggleTheme }) {
   const [auth, setAuth] = useState(null)
   const [user, setUser] = useState({
     id: "",
     name: "",
     email: ""
   })
-  // let currentuserId = ""
 
   useEffect(() => {
     let u = localStorage.getItem("user")
@@ -27,17 +26,21 @@ function Main() {
     const userName = info.name
     const userId = info.id
     const userEmail = info.email
-    // const currentuserId = info.id
     setUser({ id: userId, name: userName, email: userEmail })
   }
 
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route
+        path="/"
+        element={<Home theme={theme} toggleTheme={toggleTheme} />}
+      />
       <Route
         path="login"
         element={
           <Login
+            toggleTheme={toggleTheme}
+            theme={theme}
             authenticate={() => setAuth(true)}
             setUserHandler={setUserHandler}
           />
@@ -48,14 +51,26 @@ function Main() {
         <Route
           path="/user/:firstName"
           element={
-            <UserAccount currentuser={user} auth={auth} setAuth={setAuth} />
+            <UserAccount
+              toggleTheme={toggleTheme}
+              theme={theme}
+              currentuser={user}
+              auth={auth}
+              setAuth={setAuth}
+            />
           }
         />
       )}
 
       <Route
         path="*"
-        element={<ErrorPage to={auth ? "/login/:firstName" : "/login"} />}
+        element={
+          <ErrorPage
+            toggleTheme={toggleTheme}
+            theme={theme}
+            to={auth ? "/login/:firstName" : "/login"}
+          />
+        }
       />
     </Routes>
   )
