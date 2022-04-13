@@ -3,6 +3,7 @@ const express = require("express")
 const path = require("path")
 const cors = require("cors")
 const app = express()
+const publicPath = path.join(__dirname, "..", "public")
 let { SERVER_PORT } = process.env
 const {
   registerUser,
@@ -26,10 +27,10 @@ const {
 // Middleware
 app.use(express.json())
 app.use(cors())
-app.use(express.static("public"))
+app.use(express.static(publicPath))
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"))
+app.get("*", (req, res) => {
+  res.sendFile(path.join(publicPath, "index.html"))
 })
 
 // Put endpoints here
