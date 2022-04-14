@@ -1,7 +1,7 @@
 .useraccount {
 display: relative;
 background-color: #fefbf3;
-/* height: 100vh; */
+height: 100vh;
 }
 
 .useraccount > h1 {
@@ -29,10 +29,15 @@ border: none;
 display: flex;
 flex-wrap: wrap;
 justify-content: left;
-height: 82vh;
+/* height: 100vh; */
 }
 
-.switchesTwo {
-    text-align: center;
-    padding-bottom: 2em;
+.switches {
+    width: fit-content;
+    position: absolute;
+    left: 0; 
+  right: 0; 
+  bottom: 2em;
+  margin-left: auto; 
+  margin-right: auto; 
 }
