@@ -1,8 +1,8 @@
-# "Checked!" Capstone Project
+# "Checked" Capstone Project
 
 ## About
 
-"Checked!" is a full stack web application that allows users to create and save checklists for different occasions in their account. The tasks in the checklists are able to be edited or deleted by the user.
+"Checked" is a full stack web application that allows users to create and save checklists for different occasions in their account. The tasks in the checklists are able to be edited or deleted by the user.
 
 ## MVP
 
