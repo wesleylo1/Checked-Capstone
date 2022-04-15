@@ -84,7 +84,7 @@ function Checklist({ title, id, setChecklists }) {
             />
           </div>
 
-          <h2>{title}</h2>
+          <h2>{title.replace(/_/g, " ")}</h2>
 
           <form>
             <input
@@ -135,7 +135,7 @@ function Checklist({ title, id, setChecklists }) {
         ""
       )}
       <div onClick={openChecklist} className="cl-box">
-        <h2 key={id.toString()}>{title}</h2>
+        <h2 key={id.toString()}>{title.replace(/_/g, " ")}</h2>
       </div>
     </div>
   )

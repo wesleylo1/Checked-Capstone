@@ -57,7 +57,9 @@ function UserAccount({ currentuser, setAuth, theme, toggleTheme }) {
     e.preventDefault()
     setFormPopup(true)
     axios
-      .post(`/newlist/${currentuser.id}`, { title: listTitle })
+      .post(`/newlist/${currentuser.id}`, {
+        title: listTitle.replace(/ /g, "_")
+      })
       .then((res) => {
         console.log(res.data)
         setNewTitle("")
