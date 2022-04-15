@@ -1,8 +1,8 @@
-# "Checked!" Capstone Project
+# "Checked" Capstone Project
 
 ## About
 
-"Checked!" is a web application that allows users to create and save checklists for different occasions in their account.
+"Checked" is a full stack web application that allows users to create and save checklists for different occasions in their account. The tasks in the checklists are able to be edited or deleted by the user.
 
 ## MVP
 
@@ -13,8 +13,7 @@
 - Edit the checklist by editing or deleting tasks
 - Delete the checklist
 
-## DB
-
-- users table to store login information
-- events table to store tasks for checklist
-  <img width="697" alt="database" src="https://user-images.githubusercontent.com/83135411/160033583-53eba743-5355-4093-a682-37721ac3bdb0.png">
+<img width="1790" alt="Screen Shot 2022-04-14 at 3 00 55 PM" src="https://user-images.githubusercontent.com/83135411/163476242-ad11f8c7-ab66-4336-afbf-9ca8b5039666.png">
+<img width="1792" alt="Screen Shot 2022-04-14 at 3 02 12 PM" src="https://user-images.githubusercontent.com/83135411/163476391-b4f43373-070b-4304-a22d-b34ef5c6c840.png">
+<img width="1790" alt="Screen Shot 2022-04-14 at 3 14 36 PM" src="https://user-images.githubusercontent.com/83135411/163476393-5455ecb5-01c0-47b2-af9b-9e444e70f078.png">
+<img width="1791" alt="Screen Shot 2022-04-14 at 3 01 25 PM" src="https://user-images.githubusercontent.com/83135411/163476650-f08d62c6-a600-49c5-927b-af36c583d615.png">
