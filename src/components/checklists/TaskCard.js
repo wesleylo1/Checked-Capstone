@@ -19,6 +19,7 @@ function TaskCard({ element, title, id, tasks, taskCardId, setTasks }) {
       <li key={element.id}>
         <div>
           <Checkbox
+            className={title}
             size="small"
             color="secondary"
             onChange={() => {

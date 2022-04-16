@@ -217,5 +217,17 @@ module.exports = {
         WHERE id = ${eid}
       `)
     } catch {}
+  },
+
+  resetBoolean: async (req, res) => {
+    let { id, title } = req.params
+
+    try {
+      sequelize.query(`
+        UPDATE ${title}
+        SET completion = 'false'
+      `)
+      res.status(200)
+    } catch {}
   }
 }
