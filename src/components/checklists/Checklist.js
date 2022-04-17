@@ -70,6 +70,8 @@ function Checklist({ title, id, setChecklists }) {
     )
   }
 
+  // delete
+
   // const resetBoolean = () => {
   //   let checkbox = document.getElementsByClassName(`${title}`)
   //   checkbox.checked = false
