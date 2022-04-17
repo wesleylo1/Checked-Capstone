@@ -20,8 +20,8 @@ const {
   deleteUser,
   changeEmail,
   editTask,
-  deleteTask,
-  resetBoolean
+  deleteTask
+  // resetBoolean
 } = require("./controller")
 
 // Middleware
@@ -48,7 +48,7 @@ app.post("/:title/newtask", addTask)
 app.delete("/deletechecklist/:listTitle", deleteChecklist)
 app.put("/changeStatusTrue/:title/:id", changeTrue)
 app.put("/changeStatusFalse/:title/:id", changeFalse)
-app.put("/resetBoolean/:id/:title", resetBoolean)
+// app.put("/resetBoolean/:id/:title", resetBoolean)
 
 // NewChecklistModal.js
 app.post("/newtask", createNewTask)

@@ -143,13 +143,13 @@ function Checklist({ title, id, setChecklists }) {
             Delete
           </Button>
           {/* <Button
-            size="small"
-            style={{ marginTop: "2em", marginLeft: "2em" }}
-            variant="contained"
-            onClick={resetBoolean}
-          >
-            Clear
-          </Button> */}
+          size="small"
+          style={{ marginTop: "2em", marginLeft: "2em" }}
+          variant="contained"
+          onClick={resetBoolean}
+        >
+          Clear
+        </Button> */}
         </div>
       ) : (
         ""
