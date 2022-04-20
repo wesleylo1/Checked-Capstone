@@ -70,16 +70,6 @@ function Checklist({ title, id, setChecklists }) {
     )
   }
 
-  // delete
-
-  // const resetBoolean = () => {
-  //   let checkbox = document.getElementsByClassName(`${title}`)
-  //   checkbox.checked = false
-  // axios.put(`/resetBoolean/${id}/${title}`).then((res) => {
-  //   let checkbox = document.getElementsByClassName(`${title}`)
-  // })
-  // }
-
   return (
     <div>
       {formPopup ? (
@@ -142,14 +132,6 @@ function Checklist({ title, id, setChecklists }) {
           >
             Delete
           </Button>
-          {/* <Button
-          size="small"
-          style={{ marginTop: "2em", marginLeft: "2em" }}
-          variant="contained"
-          onClick={resetBoolean}
-        >
-          Clear
-        </Button> */}
         </div>
       ) : (
         ""
